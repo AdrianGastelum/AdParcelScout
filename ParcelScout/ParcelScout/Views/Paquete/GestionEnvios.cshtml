@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "GestionEnvios";
+}
+
+<div class="row">
+
+
+    <!--ROW END-->
+</div>
+
+<div class="row vp-100">
+
+    <div id="datatable-container" class="container">
+        <br />
+        <br />
+
+        <h2>Paquetería</h2>
+
+        <div class="row">
+            <div class="btn-group">
+                <button type="button" onclick="nuevo()" class="btn btn-seagreen">Nuevo</button>
+                <button type="button" onclick="ver()" class="btn btn-seagreen">Ver</button>
+
+               <!-- <button type="button" onclick="edit()" class="btn btn-seagreen">Editar</button>  -->
+                <button type="button" onclick="eliminar()" class="btn btn-seagreen">Eliminar</button>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <table id="table-envios" class="table">
+                <thead class="datatable-header">
+                    <tr>
+                        <th id="id" hidden>Id</th>
+                        <th>Folio</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Correo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <!--Should be empty for ajax data load, or match header th to td count for manual filling-->
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    <!--ROW END-->
+</div>
+
+
+
+
+@Scripts.Render("~/Scripts/js/paquete.js")
+
