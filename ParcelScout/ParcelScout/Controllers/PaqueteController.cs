@@ -12,7 +12,7 @@ namespace ParcelScout.Controllers
         // GET: Paquete
         public ActionResult Index()
         {
-            
+
             return View();
         }
 
@@ -25,8 +25,35 @@ namespace ParcelScout.Controllers
             return View();
         }
 
+        public ActionResult EditInfoPedido()
+        {
+            return PartialView("~/Views/Paquete/EditInfoPedido.cshtml");
+        }
+
         public ActionResult EditInfoPaquete() {
             return PartialView("~/Views/Paquete/EditInfoPaquete.cshtml");
+        }
+
+        public ActionResult EditInfoCliente()
+        {
+            return PartialView("~/Views/Paquete/EditInfoCliente.cshtml");
+        }
+
+        public ActionResult EditInfoDestinatario()
+        {
+            return PartialView("~/Views/Paquete/EditInfoDestinatario.cshtml");
+        }
+
+        public ActionResult ActualizarInfoPedido(int id, double peso, string dimensiones, string tipocont, string descripcion) {
+            ActionResult action = null;
+
+            if (Envio.EditarInfoPaquete(id, peso, dimensiones, tipocont, descripcion)) {
+                action = Content("true");
+            } else {
+                action = Content("false");
+            }
+
+            return action;
         }
 
         public ActionResult ObtenerTodos()
@@ -87,7 +114,7 @@ namespace ParcelScout.Controllers
         //    if (Envio.Guardar(u, 123, "fragil", "un paquete con cinta roja o algo", 359.50, "", c, d)) {
         //        action = Content("TRUE");
         //    } else {
-        //        action = Content("VALIO VERGA");
+        //        action = Content("Failed");
         //    }
 
 

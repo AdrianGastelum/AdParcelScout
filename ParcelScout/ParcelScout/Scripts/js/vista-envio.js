@@ -59,21 +59,25 @@ function cargarDatos() {
    
 }
 
+//Editar paquete.
 function editarPaquete() {
-    var modalC = $('modal-edit-paquete-cont');
+    var modalC = $('#modal-edit-paquete-cont');
     var id = $('#envio-id').val();
 
-    if (id !== 0){
+    console.log("method executiasdfasdfjalsdjflkajsdklfjaklsdjflkajskldfjlkasjdng");
+    
 
-        $('modal-edit-paquete').modal();
-        modalC.load(baseUrl + 'Paquete/EditInfoPaquete/ ', function(){
+    if (id !== "0"){
+
+        console.log("working over here");
+
+        $('#modal-edit-paquete').modal();
+        modalC.load(baseUrl + 'Paquete/EditInfoPaquete/ ', function () {
+            console.log("modal working here");
             cargarDatosPaquete(id);
         });
 
-    } else {
-
-    }
-
+    } 
 }
 
 function cargarDatosPaquete(id) {
@@ -85,11 +89,93 @@ function cargarDatosPaquete(id) {
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-
+            
             $('#peso-mod').val(data.envio.Peso);
             $('#dimensiones-mod').val(data.envio.Dimensiones);
             $('#tipocont-mod').val(data.envio.TipoContenido);
-            $('#descripcion-mod').val(data.envio.Dimensiones);
+            $('#descripcion-mod').val(data.envio.Descripcion);
+        },
+        error: function (xhr, exception) {
+
+        }
+    });
+}
+
+function actualizarPaquete() {
+    var id = $('#envio-id').val();
+
+    var peso = $('#peso-mod').val();
+    var dimensiones = $('#dimensiones-mod').val();
+    var tipocont = $('#tipocont-mod').val();
+    var descripcion = $('#descripcion-mod').val();
+
+
+    $.ajax({
+        url: baseUrl + 'Paquete/ActualizarInfoPedido/',
+        data: {
+            id: id, peso: peso, dimensiones: dimensiones, tipocont: tipocont, descripcion: descripcion
+        }, 
+        traditional: true,
+        cache: false,
+        success: function (data) {
+            if (data === "true") {
+                swal({
+                    title: "Cambios Guardados",
+                    icon: "success"
+                });
+
+                location.reload();
+            } else {
+                swal({
+                    text: "Ocurrió un problema y no se pudieron realizar los cambios",
+                    icon: "success"
+                });
+            }
+        },
+        error: function (xhr, exception){
+            swal({
+                text: "Ocurrió un problema y no se pudieron realizar los cambios",
+                icon: "success"
+            });
+        }
+    });
+
+}
+
+//Editar Info de Envio
+function editarEnvio() {
+    var modalC = $('#modal-edit-envio-cont');
+    var id = $('#envio-id').val();
+
+    if (id !== "0") {
+
+        console.log("working over here");
+
+        $('#modal-envio-paquete').modal();
+        modalC.load(baseUrl + 'Paquete/EditInfoPedido/ ', function () {
+            console.log("modal working here");
+            cargarDatosEnvio(id);
+        });
+
+    }
+}
+
+function cargarDatosEnvio(id) {
+    $.ajax({
+        url: baseUrl + "Paquete/ObtenerPorId/" + id,
+        traditional: true,
+        type: 'GET',
+        cache: false,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+
+            $('#folio').text(data.envio.Folio);
+            $('#fecha').text(data.envio.fechaString);
+            $('#usuario').text(data.envio.Empleado.Nombre);
+            $('#precio').text(data.envio.Precio);
+            $('#estado').text(data.envio.estadoString);
+
         },
         error: function (xhr, exception) {
 

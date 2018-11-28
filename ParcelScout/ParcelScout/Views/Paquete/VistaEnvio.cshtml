@@ -3,152 +3,165 @@
     ViewBag.Title = "VistaEnvio";
 }
 
-<div class="row">
-    <h1>Información del Envío</h1>
-    <input type="hidden" value="@ViewBag.IdEnvio" id="envio-id"/>
+
+
+
+<div class="container">
+
+    <div class="row">
+        <h1>Información del Envío</h1>
+        <input type="hidden" value="@ViewBag.IdEnvio" id="envio-id" />
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-6 col-lg-6 col-xs-12 margin">
+            <h2><button type="button" onclick="editarPedido()" class="btn btn-seagreen">Editar</button> Info. del Pedido</h2>
+            <table class="table col-push-1">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <th>Folio:</th>
+                        <td id="folio"></td>
+                    </tr>
+                    <tr>
+                        <th>Fecha:</th>
+                        <td id="fecha"></td>
+                    </tr>
+                    <tr>
+                        <th>Registrado por:</th>
+                        <td id="usuario"></td>
+                    </tr>
+                    <tr>
+                        <th>Precio:</th>
+                        <td id="precio"></td>
+                    </tr>
+                    <tr>
+                        <th>Estado:</th>
+                        <td id="estado"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+        <div class="col-md-6 col-lg-6 col-xs-12 margin">
+
+            <h2><button type="button" onclick="" class="btn btn-seagreen">Editar</button> Info. del Cliente</h2>
+            <table class="table col-push-1">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <th>Nombre:</th>
+                        <td id="nombre-cliente"></td>
+                    </tr>
+                    <tr>
+                        <th>Domicilio:</th>
+                        <td id="domicilio-cliente"></td>
+                    </tr>
+                    <tr>
+                        <th>Teléfono:</th>
+                        <td id="tel-cliente"></td>
+                    </tr>
+                    <tr>
+                        <th>Correo:</th>
+                        <td id="correo-cliente"></td>
+                    </tr>
+                    <tr>
+                        <th>RFC:</th>
+                        <td id="rfc-cliente"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+        <!--ROW END-->
+    </div>
+
+
+
+    <div class="row">
+
+        <div class="col-md-6 col-lg-6 col-xs-12">
+            <h2><button type="button" onclick="editarPaquete()" class="btn btn-seagreen">Editar</button> Info. del Paquete</h2>
+            <table class="table col-push-1">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <th>Peso:</th>
+                        <td id="peso"></td>
+                    </tr>
+                    <tr>
+                        <th>Dimensiones:</th>
+                        <td id="dimensiones"></td>
+                    </tr>
+                    <tr>
+                        <th>Tipo de Contenido:</th>
+                        <td id="tipo-cont"></td>
+                    </tr>
+                    <tr>
+                        <th>Descripcion:</th>
+                        <td id="descripcion"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="col-md-6 col-lg-6 col-xs-12">
+            <h2><button type="button" onclick="" class="btn btn-seagreen">Editar</button> Info. del Destinatario</h2>
+            <table class="table col-push-1">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <th>Nombre:</th>
+                        <td id="nombre-dest"></td>
+                    </tr>
+                    <tr>
+                        <th>Domicilio:</th>
+                        <td id="domicilio-dest"></td>
+                    </tr>
+                    <tr>
+                        <th>C.P.:</th>
+                        <td id="cp-dest"></td>
+                    </tr>
+                    <tr>
+                        <th>Ciudad:</th>
+                        <td id="ciudad-dest"></td>
+                    </tr>
+                    <tr>
+                        <th>Estado:</th>
+                        <td id="estado-dest"></td>
+                    </tr>
+                    <tr>
+                        <th>Teléfono:</th>
+                        <td id="telefono-dest"></td>
+                    </tr>
+                    <tr>
+                        <th>Correo:</th>
+                        <td id="correo-dest"></td>
+                    </tr>
+                    <tr>
+                        <th>Recibe:</th>
+                        <td id="recibe"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--ROW END-->
+    </div>
+
+<!--Conainter end-->
 </div>
 
-<div class="row">
 
-    <div class="col-md-6 col-lg-6 col-xs-12">
-            <h2><button type="button" onclick="" class="btn btn-seagreen">Editar</button> Info. del Pedido</h2>
-        <table class="table col-push-1">
-            <thead></thead>
-            <tbody>
-                <tr>
-                    <th>Folio:</th>
-                    <td id="folio"></td>
-                </tr>
-                <tr>
-                    <th>Fecha:</th>
-                    <td id="fecha"></td>
-                </tr>
-                <tr>
-                    <th>Registrado por:</th>
-                    <td id="usuario"></td>
-                </tr>
-                <tr>
-                    <th>Precio:</th>
-                    <td id="precio"></td>
-                </tr>
-                <tr>
-                    <th>Estado:</th>
-                    <td id="estado"></td>
-                </tr>
-            </tbody>
-        </table>
-        
-       
-      
-    </div>
-
-    <div class="col-md-6 col-lg-6 col-xs-12">
-
-        <h2><button type="button" onclick="" class="btn btn-seagreen">Editar</button> Info. del Cliente</h2> 
-        <table class="table col-push-1">
-            <thead></thead>
-            <tbody>
-                <tr>
-                    <th>Nombre:</th>
-                    <td id="nombre-cliente"></td>
-                </tr>
-                <tr>
-                    <th>Domicilio:</th>
-                    <td id="domicilio-cliente"></td>
-                </tr>
-                <tr>
-                    <th>Teléfono:</th>
-                    <td id="tel-cliente"></td>
-                </tr>
-                <tr>
-                    <th>Correo:</th>
-                    <td id="correo-cliente"></td>
-                </tr>
-                <tr>
-                    <th>RFC:</th>
-                    <td id="rfc-cliente"></td>
-                </tr>
-            </tbody>
-        </table>
-
-        
-        
-    </div>
-
-<!--ROW END-->
-</div>
-
-<div class="row">
-
-    <div class="col-md-6 col-lg-6 col-xs-12">
-        <h2><button type="button" onclick="editarPaquete()" class="btn btn-seagreen">Editar</button> Info. del Paquete</h2> 
-        <table class="table col-push-1">
-            <thead></thead>
-            <tbody>
-                <tr>
-                    <th>Peso:</th>
-                    <td id="peso"></td>
-                </tr>
-                <tr>
-                    <th>Dimensiones:</th>
-                    <td id="dimensiones"></td>
-                </tr>
-                <tr>
-                    <th>Tipo de Contenido:</th>
-                    <td id="tipo-cont"></td>
-                </tr>
-                <tr>
-                    <th>Descripcion:</th>
-                    <td id="descripcion"></td>
-                </tr>
-            </tbody>
-        </table>
-
-    </div>
-
-    <div class="col-md-6 col-lg-6 col-xs-12">
-        <h2><button type="button" onclick="" class="btn btn-seagreen">Editar</button> Info. del Destinatario</h2> 
-        <table class="table col-push-1">
-            <thead></thead>
-            <tbody>
-                <tr>
-                    <th>Nombre:</th>
-                    <td id="nombre-dest"></td>
-                </tr>
-                <tr>
-                    <th>Domicilio:</th>
-                    <td id="domicilio-dest"></td>
-                </tr>
-                <tr>
-                    <th>C.P.:</th>
-                    <td id="cp-dest"></td>
-                </tr>
-                <tr>
-                    <th>Ciudad:</th>
-                    <td id="ciudad-dest"></td>
-                </tr>
-                <tr>
-                    <th>Estado:</th>
-                    <td id="estado-dest"></td>
-                </tr>
-                <tr>
-                    <th>Teléfono:</th>
-                    <td id="telefono-dest"></td>
-                </tr>
-                <tr>
-                    <th>Correo:</th>
-                    <td id="correo-dest"></td>
-                </tr>
-                <tr>
-                    <th>Recibe:</th>
-                    <td id="recibe"></td>
-                </tr>
-            </tbody>
-        </table>  
-    </div>
-
-<!--ROW END-->
-</div>
 
 <div class="row">
 
@@ -172,8 +185,12 @@
             <table class="table tabla-ubicacion table-nonfluid col-xs-2">
                 <thead>
                     <tr>
+                        <th id="id" hidden>Id</th>
                         <th>Fecha</th>
-                        <th>Ubicacion</th>
+                        <th>Ciudad</th>
+                        <th>Estado</th>
+                        <th>Latitud</th>
+                        <th>Longitud</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -189,15 +206,14 @@
 
     </div>
 
-<!--ROW END-->
+    <!--ROW END-->
 </div>
 
 
 
 
 <!--MODALS-->
-
-<!--MODALS-->
+<!--INFO ENVIO-->
 <div class="modal fade" id="modal-edit-envio" role="dialog">
     <div class="modal-dialog">
 
@@ -209,6 +225,7 @@
     </div>
 </div>
 
+<!--INFO PAQUETE-->
 <div class="modal fade" id="modal-edit-paquete" role="dialog">
     <div class="modal-dialog">
 
@@ -220,7 +237,7 @@
     </div>
 </div>
 
-<!--MODALS-->
+<!--INFO CLIENTE-->
 <div class="modal fade" id="modal-edit-cliente" role="dialog">
     <div class="modal-dialog">
 
@@ -232,7 +249,7 @@
     </div>
 </div>
 
-<!--MODALS-->
+<!--INFO DESTINATARIO-->
 <div class="modal fade" id="modal-edit-destinatario" role="dialog">
     <div class="modal-dialog">
 

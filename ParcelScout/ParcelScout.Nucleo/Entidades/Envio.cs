@@ -28,11 +28,11 @@ namespace ParcelScout.Nucleo.Entidades
         public string fechaString { get; set; }
         public string estadoString { get; set; }
 
-        // IList<RegistroUbicacion> historial;
+        public IList<RegistroUbicacion> Historial { get; set; }
 
         public static IList<Envio> ObtenerTodos()
         {
-            IList<Envio> envios;
+            IList<Envio> envios = new List<Envio>();
             try
             {
                 using (ISession session = Persistent.SessionFactory.OpenSession())
@@ -47,7 +47,8 @@ namespace ParcelScout.Nucleo.Entidades
                     {
                         envio.fechaString = envio.FechaCreacion.ToString("MM/dd/yyyy HH:mm:ss");
 
-                        switch (envio.Estado){
+                        switch (envio.Estado)
+                        {
                             case Estado.EN_PROCESO:
                                 envio.estadoString = "En Proceso";
                                 break;
@@ -152,6 +153,12 @@ namespace ParcelScout.Nucleo.Entidades
             }
 
             return realizado;
+        }
+
+        public static bool EditarInfoPaquete(int id, double peso, string dimensiones, string tipocont, string descripcion) {
+
+
+            return false;
         }
 
         public static string GenerarFolio(int id, DateTime date)
