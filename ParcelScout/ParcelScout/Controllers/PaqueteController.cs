@@ -12,6 +12,7 @@ namespace ParcelScout.Controllers
         // GET: Paquete
         public ActionResult Index()
         {
+            
             return View();
         }
 
@@ -22,6 +23,10 @@ namespace ParcelScout.Controllers
         public ActionResult VistaEnvio(int id) {
             ViewBag.IdEnvio = id;
             return View();
+        }
+
+        public ActionResult EditInfoPaquete() {
+            return PartialView("~/Views/Paquete/EditInfoPaquete.cshtml");
         }
 
         public ActionResult ObtenerTodos()

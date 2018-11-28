@@ -58,3 +58,41 @@ function cargarDatos() {
     }
    
 }
+
+function editarPaquete() {
+    var modalC = $('modal-edit-paquete-cont');
+    var id = $('#envio-id').val();
+
+    if (id !== 0){
+
+        $('modal-edit-paquete').modal();
+        modalC.load(baseUrl + 'Paquete/EditInfoPaquete/ ', function(){
+            cargarDatosPaquete(id);
+        });
+
+    } else {
+
+    }
+
+}
+
+function cargarDatosPaquete(id) {
+    $.ajax({
+        url: baseUrl + "Paquete/ObtenerPorId/" + id,
+        traditional: true,
+        type: 'GET',
+        cache: false,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+
+            $('#peso-mod').val(data.envio.Peso);
+            $('#dimensiones-mod').val(data.envio.Dimensiones);
+            $('#tipocont-mod').val(data.envio.TipoContenido);
+            $('#descripcion-mod').val(data.envio.Dimensiones);
+        },
+        error: function (xhr, exception) {
+
+        }
+    });
+}

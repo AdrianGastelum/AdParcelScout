@@ -229,6 +229,10 @@
     <Content Include="Views\Paquete\GestionEnvios.cshtml" />
     <Content Include="Views\Paquete\VistaEnvio.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Paquete\EditInfoPaquete.cshtml" />
+    <Content Include="Views\Paquete\EditInfoPedido.cshtml" />
+    <Content Include="Views\Paquete\EditInfoCliente.cshtml" />
+    <Content Include="Views\Paquete\EditInfoDestinatario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
