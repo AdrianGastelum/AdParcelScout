@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "wsParcelScout", "wsParcelScout\", "{74006165-7221-4C15-A0BC-D6D857AF17BF}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50335"
+		Debug.AspNetCompiler.PhysicalPath = "wsParcelScout\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50335\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50335"
+		Release.AspNetCompiler.PhysicalPath = "wsParcelScout\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50335\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50335"
+		SlnRelativePath = "wsParcelScout\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74006165-7221-4C15-A0BC-D6D857AF17BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74006165-7221-4C15-A0BC-D6D857AF17BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C87A65FB-11A5-4BD1-9118-52609B6869AA}
+	EndGlobalSection
+EndGlobal
