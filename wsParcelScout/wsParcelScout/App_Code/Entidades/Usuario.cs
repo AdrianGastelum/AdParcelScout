@@ -18,7 +18,15 @@ public class Usuario : Persistent
     public string Password { get; set; }
     public string Rol { get; set; }
 
-    public IList<Usuario> ObtenerTodos2() { return ObtenerTodos(); }
+    public Usuario pepe()
+    {
+        Usuario p = new Usuario();
+        p.Id = 2;
+        p.Nombre = "pepe";
+        p.Correo = "Muejejej@hotmail.com";
+        return p;
+    }
+
 
     public static IList<Usuario> ObtenerTodos()
     {

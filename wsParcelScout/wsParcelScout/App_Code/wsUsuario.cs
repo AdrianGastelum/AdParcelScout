@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Services;
 
 /// <summary>
@@ -17,14 +15,13 @@ public class wsUsuario : System.Web.Services.WebService
     public wsUsuario()
     {
 
-        //Uncomment the following line if using designed components 
-        //InitializeComponent(); 
+        
     }
 
     [WebMethod]
-    public IList<Usuario> ObtenerTodos(String text)
+    public List<Usuario> ObtenerTodos(String text)
     {
         Usuario u = new Usuario();
-        return u.ObtenerTodos2();
+        List<Usuario> usrs = u.ObtenerTodos();
     }
 }
