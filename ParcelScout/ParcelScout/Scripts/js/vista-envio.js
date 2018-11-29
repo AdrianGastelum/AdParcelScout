@@ -15,15 +15,15 @@ function cargarDatos() {
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                console.log(data);
 
-                console.log(data.envio.Folio);
+                console.log(data);
 
                 //Info. del Envio
                 $('#folio').text(data.envio.Folio);
                 $('#fecha').text(data.envio.fechaString);
                 $('#usuario').text(data.envio.Empleado.Nombre);
-                $('#precio').text(data.envio.Precio);
+                $('#precio').text("$" + data.envio.Precio);
+                $('#no-rastreo').text(data.envio.NoRastreo);
                 $('#estado').text(data.envio.estadoString);
 
                 //Info. del Cliente
@@ -64,16 +64,13 @@ function editarPaquete() {
     var modalC = $('#modal-edit-paquete-cont');
     var id = $('#envio-id').val();
 
-    console.log("method executiasdfasdfjalsdjflkajsdklfjaklsdjflkajskldfjlkasjdng");
-    
-
     if (id !== "0"){
 
         console.log("working over here");
 
         $('#modal-edit-paquete').modal();
         modalC.load(baseUrl + 'Paquete/EditInfoPaquete/ ', function () {
-            console.log("modal working here");
+            //console.log("modal working here");
             cargarDatosPaquete(id);
         });
 
@@ -128,14 +125,14 @@ function actualizarPaquete() {
             } else {
                 swal({
                     text: "Ocurrió un problema y no se pudieron realizar los cambios",
-                    icon: "success"
+                    icon: "error"
                 });
             }
         },
         error: function (xhr, exception){
             swal({
                 text: "Ocurrió un problema y no se pudieron realizar los cambios",
-                icon: "success"
+                icon: "error"
             });
         }
     });
@@ -149,9 +146,7 @@ function editarEnvio() {
 
     if (id !== "0") {
 
-        console.log("working over here");
-
-        $('#modal-envio-paquete').modal();
+        $('#modal-edit-envio').modal();
         modalC.load(baseUrl + 'Paquete/EditInfoPedido/ ', function () {
             console.log("modal working here");
             cargarDatosEnvio(id);
@@ -170,15 +165,65 @@ function cargarDatosEnvio(id) {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
 
-            $('#folio').text(data.envio.Folio);
-            $('#fecha').text(data.envio.fechaString);
-            $('#usuario').text(data.envio.Empleado.Nombre);
-            $('#precio').text(data.envio.Precio);
-            $('#estado').text(data.envio.estadoString);
+            $('#precio-mod').val(data.envio.Precio);
 
+            switch (data.envio.Estado){
+                case 1:
+                    $('#estado-mod').val("en-proceso");
+                    break;
+                case 2:
+                    $('#estado-mod').val("enviado");
+                    break;
+                case 3:
+                    $('#estado-mod').val("recibido");
+                    break;
+                case 4:
+                    $('#estado-mod').val("cancelado");
+                    break;
+                default:
+                    break;
+            }
         },
         error: function (xhr, exception) {
 
         }
     });
+}
+
+function actualizarEnvio() {
+    var id = $('#envio-id').val();
+
+    var precio = $('#precio-mod').val();
+    var estado = $('#estado-mod').val();
+
+    $.ajax({
+        url: baseUrl + 'Paquete/ActualizarInfoEnvio/',
+        data: {
+            id: id, precio: precio, estado: estado
+        },
+        traditional: true,
+        cache: false,
+        success: function (data) {
+            if (data === "true") {
+                swal({
+                    title: "Cambios Guardados",
+                    icon: "success"
+                });
+
+                location.reload();
+            } else {
+                swal({
+                    text: "Ocurrió un problema y no se pudieron realizar los cambios",
+                    icon: "error"
+                });
+            }
+        },
+        error: function (xhr, exception) {
+            swal({
+                text: "Ocurrió un problema y no se pudieron realizar los cambios",
+                icon: "error"
+            });
+        }
+    });
+
 }

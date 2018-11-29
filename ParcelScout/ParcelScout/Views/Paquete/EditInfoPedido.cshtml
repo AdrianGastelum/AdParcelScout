@@ -14,23 +14,19 @@
 
         <form action="" class="col-xs-10 col-xs-push-1">
             <div class="form-group">
-                <label for="peso">Peso:</label>
-                <input type="text" class="form-control input-sm" name="peso" id="peso-mod">
+                <label for="precio">Precio:</label>
+                <input type="text" class="form-control input-sm" name="precio" id="precio-mod">
             </div>
             <div class="form-group">
-                <label for="dimensiones">Dimensiones:</label>
-                <input type="text" class="form-control input-sm" name="dimensiones" id="dimensiones-mod">
+                <label for="estado">Estado:&nbsp;</label><select class="form-control" name="permisos" id="estado-mod">
+                    <option value="en-proceso">En proceso</option>
+                    <option value="enviado">Enviado</option>
+                    <option value="recibido">Recibido</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label for="tipoCont">Tipo de Contenido:</label>
-                <input type="email" class="form-control input-sm" name="tipoCont" id="tipocont-mod">
-            </div>
-            <div class="form-group">
-                <label for="descripción">Descripción:</label>
-                <input type="text" class="form-control input-sm" name="descripcion" id="descripcion-mod">
-            </div>
-
-            <button type="button" class="btn btn-seagreen pull-right shadow" onclick="actualizarPaquete()">Guardar Cambios</button>
+            
+            <button type="button" class="btn btn-seagreen pull-right shadow" onclick="actualizarEnvio()">Guardar Cambios</button>
         </form>
 
         <!--Row form end-->

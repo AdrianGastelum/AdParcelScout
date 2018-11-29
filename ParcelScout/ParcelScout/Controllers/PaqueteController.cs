@@ -56,6 +56,22 @@ namespace ParcelScout.Controllers
             return action;
         }
 
+        public ActionResult ActualizarInfoEnvio(int id, double precio, string estado)
+        {
+            ActionResult action = null;
+
+            if (Envio.EditarInfoEnvio(id, precio, estado))
+            {
+                action = Content("true");
+            }
+            else
+            {
+                action = Content("false");
+            }
+
+            return action;
+        }
+
         public ActionResult ObtenerTodos()
         {
             try

@@ -96,13 +96,13 @@ namespace ParcelScout.Nucleo.Entidades
                             e.estadoString = "En Proceso";
                             break;
                         case Estado.ENVIADO:
-                            e.estadoString = "En Proceso";
+                            e.estadoString = "Enviado";
                             break;
                         case Estado.RECIBIDO:
-                            e.estadoString = "En Proceso";
+                            e.estadoString = "Recibido";
                             break;
                         case Estado.CANCELADO:
-                            e.estadoString = "En Proceso";
+                            e.estadoString = "Cancelado";
                             break;
                         default:
                             break;
@@ -156,9 +156,64 @@ namespace ParcelScout.Nucleo.Entidades
         }
 
         public static bool EditarInfoPaquete(int id, double peso, string dimensiones, string tipocont, string descripcion) {
+            bool realizado = false;
 
+            try {
+                Envio e = ObtenerPorId(id);
 
-            return false;
+                e.Peso = peso;
+                e.Dimensiones = dimensiones;
+                e.TipoContenido = tipocont;
+                e.Descripcion = descripcion;
+
+                e.Update();
+
+                realizado = true;
+            } catch (Exception ex) {
+                throw ex;
+            }
+
+            return realizado;
+        }
+
+        public static bool EditarInfoEnvio(int id, double precio, string estado)
+        {
+            bool realizado = false;
+
+            try
+            {
+                Envio e = ObtenerPorId(id);
+
+                e.Precio = precio;
+
+                switch (estado)
+                {
+                    case "en_proceso":
+                        e.Estado = Estado.EN_PROCESO;
+                        break;
+                    case "enviado":
+                        e.Estado = Estado.ENVIADO;
+                        break;
+                    case "recibido":
+                        e.Estado = Estado.RECIBIDO;
+                        break;
+                    case "cancelado":
+                        e.Estado = Estado.CANCELADO;
+                        break;
+                    default:
+                        break;
+                }
+
+                e.Update();
+
+                realizado = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return realizado;
         }
 
         public static string GenerarFolio(int id, DateTime date)

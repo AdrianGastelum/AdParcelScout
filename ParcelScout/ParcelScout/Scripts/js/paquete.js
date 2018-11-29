@@ -34,7 +34,7 @@ function obtenerId() {
         var row = table.row(selectedIndex).data();
         id = row.Id;
     } else {
-        console.log("the little shit is undefined");
+        
     }
     return id;
 }
