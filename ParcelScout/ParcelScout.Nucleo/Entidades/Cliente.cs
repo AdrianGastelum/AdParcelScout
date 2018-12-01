@@ -13,6 +13,9 @@ namespace ParcelScout.Nucleo.Entidades
         public override int Id { get; set; }
         public string Nombre { get; set; }
         public string Domicilio { get; set; }
+        public string Telefono1 { get; set; }
+        public string Telefono2 { get; set; }
+        public string Telefono3 { get; set; }
         public string Telefono { get; set; }
         public string Correo { get; set; }
         public string RFC { get; set; }
@@ -84,7 +87,8 @@ namespace ParcelScout.Nucleo.Entidades
         }
 
         public static bool GuardarCambios(int id, string nombre, string domicilio,
-                                        string telefono, string correo, string rfc)
+                                        string telefono1, string telefono2, string telefono3,
+                                        string correo, string rfc)
         {
             bool realizado = false;
 
@@ -94,7 +98,9 @@ namespace ParcelScout.Nucleo.Entidades
                 Cliente c = ObtenerPorId(id);
                 c.Nombre = nombre;
                 c.Domicilio = domicilio;
-                c.Telefono = telefono;
+                c.Telefono1 = telefono1;
+                c.Telefono2 = telefono2;
+                c.Telefono3 = telefono3;
                 c.Correo = correo;
                 c.RFC = rfc;
 

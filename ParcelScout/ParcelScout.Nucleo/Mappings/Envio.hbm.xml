@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ParcelScout.Nucleo" assembly="ParcelScout.Nucleo">
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
   <class name="ParcelScout.Nucleo.Entidades.Envio, ParcelScout.Nucleo" table="envio" lazy="false">
     <id name="Id" type="int">
       <column name="id"/>
@@ -47,6 +47,11 @@
     <property name="Estado" type="ParcelScout.Nucleo.Entidades.Estado, ParcelScout.Nucleo">
       <column name="estado"/>
     </property>
+
+    <bag name="Historial" cascade="all-delete-orphan" lazy="false">
+      <key column="envio_id"/>
+      <one-to-many class="ParcelScout.Nucleo.Entidades.RegistroUbicacion, ParcelScout.Nucleo"/>
+    </bag>
 
 
   </class>

@@ -1,15 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="ParcelScout.Nucleo" assembly="ParcelScout.Nucleo">
-  <class name="ParcelScout.Nucleo.Entidades.Cliente, ParcelScout.Nucleo" table="cliente" lazy="false">
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="ParcelScout.Nucleo.Entidades.RegistroUbicacion, ParcelScout.Nucleo" table="registro_ubicacion" lazy="false">
     <id name="Id" type="int">
       <column name="id"/>
       <generator class="identity"/>
     </id>
+
     <property name="Fecha" type="DateTime">
       <column name="fecha"/>
-    </property>
-    <property name="Domicilio" type="string">
-      <column name="domicilio"/>
     </property>
     <property name="Ciudad" type="string">
       <column name="ciudad"/>
@@ -17,15 +15,12 @@
     <property name="Estado" type="string">
       <column name="estado"/>
     </property>
-    <property name="CodigoPostal" type="string">
-      <column name="codigo_postal"/>
-    </property>
     <property name="Lon" type="double">
-      <column name="Lon"/>
+      <column name="longitud"/>
     </property>
     <property name="Lat" type="double">
-      <column name="Lat"/>
+      <column name="latitud"/>
     </property>
-    
+
   </class>
 </hibernate-mapping>

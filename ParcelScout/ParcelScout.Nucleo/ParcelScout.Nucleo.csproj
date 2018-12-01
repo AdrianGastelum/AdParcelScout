@@ -89,10 +89,6 @@
     <Compile Include="Service2.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Mappings\RegistroUbicacion.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +96,9 @@
     <EmbeddedResource Include="Mappings\Destinatario.hbm.xml" />
     <EmbeddedResource Include="Mappings\Envio.hbm.xml" />
     <EmbeddedResource Include="Mappings\Usuario.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\RegistroUbicacion.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
