@@ -72,6 +72,41 @@ namespace ParcelScout.Controllers
             return action;
         }
 
+        public ActionResult ActualizarInfoCliente(int id, string nombre, string domicilio, string telefono1, string telefono2,
+                                                    string telefono3, string correo, string rfc)
+        {
+            ActionResult action = null;
+
+            if (Cliente.GuardarCambios(id, nombre, domicilio, telefono1, telefono2,
+                                                    telefono3, correo, rfc))
+            {
+                action = Content("true");
+            }
+            else
+            {
+                action = Content("false");
+            }
+
+            return action;
+        }
+
+        public ActionResult ActualizarInfoDestinatario(int id, string nombre, string domicilio, string codigoPostal, string telefono,
+                                                    string ciudad, string estado, string correo, string recibe)
+        {
+            ActionResult action = null;
+
+            if (Destinatario.GuardarCambios(id, nombre, domicilio, codigoPostal, ciudad, estado, telefono, correo, recibe))
+            {
+                action = Content("true");
+            }
+            else
+            {
+                action = Content("false");
+            }
+
+            return action;
+        }
+
         public ActionResult ObtenerTodos()
         {
             try
