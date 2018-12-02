@@ -138,6 +138,19 @@ namespace ParcelScout.Controllers
         }
 
 
+        public ActionResult ObtenerHistorialEnvio(int idEnvio) {
+
+            try {
+
+                IList<RegistroUbicacion> historial = RegistroUbicacion.ObtenerTodosPorIdEnvio(idEnvio);
+
+                return Json(new { data = historial }, JsonRequestBehavior.AllowGet);
+            } catch (Exception ex) {
+                return RedirectToAction("Error", "Home");
+            }
+
+        }
+
 
         //public ActionResult PruebaGuardado() {
         //    ActionResult action = null;

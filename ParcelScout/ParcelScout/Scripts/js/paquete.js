@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
     cargarTabla();
-    console.log("ITS WORKING");
 });
 
 function cargarTabla() {
@@ -33,9 +32,7 @@ function obtenerId() {
         console.log("Selected index: " + selectedIndex);
         var row = table.row(selectedIndex).data();
         id = row.Id;
-    } else {
-        
-    }
+    } 
     return id;
 }
 

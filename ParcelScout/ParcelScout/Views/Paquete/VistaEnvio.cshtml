@@ -162,7 +162,7 @@
         <!--ROW END-->
     </div>
 
-<!--Containter end-->
+    <!--Containter end-->
 </div>
 
 
@@ -178,6 +178,9 @@
 
             <div class="btn-group">
                 <button type="button" onclick="" class="btn btn-seagreen">Agregar ubicación</button>
+                <button type="button" onclick="" class="btn btn-seagreen">Ver Recorrido</button>
+                <button type="button" onclick="" class="btn btn-seagreen">Modificar</button>
+                <button type="button" onclick="" class="btn btn-seagreen">Eliminar</button>
             </div>
         </div>
 
@@ -186,7 +189,7 @@
 
         <div class="row">
 
-            <table class="table tabla-ubicacion table-nonfluid col-xs-2">
+            <table id="table-historial"class="table tabla-ubicacion table-nonfluid col-xs-2">
                 <thead>
                     <tr>
                         <th id="id" hidden>Id</th>
@@ -198,10 +201,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>asdfasdf</td>
-                        <td>asdfasd</td>
-                    </tr>
+                   
                 </tbody>
             </table>
 
@@ -265,6 +265,29 @@
     </div>
 </div>
 
+<!--AGREGAR UBICACION-->
+<div class="modal fade" id="modal-add-ubicacion" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" id="modal-add-ubicacion-cont">
+
+        </div>
+
+    </div>
+</div>
+
+<!--RECORRIDO-->
+<div class="modal fade" id="modal-recorrido" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" id="modal-recorrido-cont">
+
+        </div>
+
+    </div>
+</div>
 
 @Scripts.Render("~/Scripts/js/vista-envio.js")
 
