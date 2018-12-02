@@ -47,3 +47,9 @@ function ver() {
         swal("Error", "Seleccione un registro", "warning");
     }
 }
+
+function nuevo() {
+    var modalC = $('#modal-registrar-envio-cont');
+    $('#modal-registrar-envio').modal();
+    modalC.load(baseUrl + 'Paquete/RegistrarNuevoEnvioForm/', function () { });
+}

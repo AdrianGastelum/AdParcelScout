@@ -131,3 +131,11 @@ pagination > .active > a, .pagination > .active > span, .pagination > .active > 
     min-height: 100vh;
 
 }
+
+/*Nav del form de nuevo paquete*/
+#nav-from {
+    background-color:none;
+    height: var(--altura-nav);
+    box-shadow: none;
+    padding-right: 15px;
+}
