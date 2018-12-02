@@ -12,10 +12,12 @@ namespace ParcelScout.Nucleo.Entidades
     {
         public override int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public string Ciudad { get; set;}
+        public string Ciudad { get; set; }
         public string Estado { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }
+
+        public string fechaString { get; set; }
 
         public static IList<RegistroUbicacion> ObtenerTodos()
         {
@@ -27,6 +29,13 @@ namespace ParcelScout.Nucleo.Entidades
                     ICriteria crit = session.CreateCriteria(new RegistroUbicacion().GetType());
 
                     ubicaciones = crit.List<RegistroUbicacion>();
+
+                    foreach (RegistroUbicacion ub in ubicaciones) {
+
+                        ub.fechaString = ub.Fecha.ToString("MM/dd/yyyy HH:mm:ss");
+
+                    }
+
                     session.Close();
                 }
 
@@ -38,16 +47,18 @@ namespace ParcelScout.Nucleo.Entidades
             return ubicaciones;
         }
 
-        public static Cliente ObtenerPorId(int id)
+        public static RegistroUbicacion ObtenerPorId(int id)
         {
-            Cliente c = new Cliente();
+            RegistroUbicacion ru = new RegistroUbicacion();
             try
             {
                 using (ISession session = Persistent.SessionFactory.OpenSession())
                 {
-                    ICriteria crit = session.CreateCriteria(c.GetType());
+                    ICriteria crit = session.CreateCriteria(ru.GetType());
                     crit.Add(Expression.Eq("Id", id));
-                    c = (crit.UniqueResult<Cliente>());
+                    ru = (crit.UniqueResult<RegistroUbicacion>());
+
+                    ru.fechaString = ru.Fecha.ToString("MM/dd/yyyy HH:mm:ss");
 
                 }
             }
@@ -56,7 +67,24 @@ namespace ParcelScout.Nucleo.Entidades
 
                 throw ex;
             }
-            return c;
+            return ru;
+        }
+
+        public static IList<RegistroUbicacion> ObtenerTodosPorIdEnvio(int idEnvio) {
+            IList<RegistroUbicacion> ubicaciones;
+
+            Envio e = Envio.ObtenerPorId(idEnvio);
+            
+            ubicaciones = e.Historial;
+
+            foreach (RegistroUbicacion ub in ubicaciones)
+            {
+
+                ub.fechaString = ub.Fecha.ToString("MM/dd/yyyy HH:mm:ss");
+
+            }
+
+            return ubicaciones;
         }
 
         public static bool Guardar(string domicilio, string ciudad,
@@ -81,22 +109,43 @@ namespace ParcelScout.Nucleo.Entidades
             return realizado;
         }
 
-        public static bool GuardarCambios(int id, string domicilio, string ciudad,
-                                   string estado, string codigoPostal, double lat, double lon)
+        public static bool GuardarCambios(int id, string ciudad, string estado, double lat, double lon)
         {
             bool realizado = false;
 
             try
             {
 
-               
-          
+                RegistroUbicacion ru = ObtenerPorId(id);
+                ru.Ciudad = ciudad;
+                ru.Estado = estado;
+                ru.Lat = lat;
+                ru.Lon = lon;
+
+                ru.Update();
 
                 realizado = true;
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+
+            return realizado;
+        }
+
+        public static bool Delete(int id) {
+            bool realizado = false;
+
+            try {
+
+                RegistroUbicacion ru = ObtenerPorId(id);
+
+                ru.Delete();
+
+                realizado = true;
+            } catch (Exception ex) {
+
             }
 
             return realizado;

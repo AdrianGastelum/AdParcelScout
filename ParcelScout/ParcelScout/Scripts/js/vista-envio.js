@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     cargarDatos();
-
+    cargarTabla();
 });
 
 function cargarDatos() {
@@ -406,4 +406,50 @@ function actualizarDestinatario() {
         }
     });
 
+}
+
+
+
+//REGISTRO DATABLE
+function cargarTabla() {
+    var id = $('#envio-id').val();
+
+    console.log("doing something");
+    console.log("this is the id: " + id);
+
+    var table = $('#table-historial').DataTable();
+    table.destroy();
+    $('#table-historial').DataTable({
+        "autoWidth": true,
+        "processing": true,
+        "ajax": {
+            "url": baseUrl + "Paquete/ObtenerHistorialEnvio/",
+            "traditional": true,
+            "data": {"idEnvio": id}
+        },
+        "columns": [
+            { "data": "Id", visible: false, searchable: false },
+            { "data": "fechaString" },
+            { "data": "Ciudad" },
+            { "data": "Estado" },
+            { "data": "Lat" },
+            { "data": "Lon" }
+        ],
+        select: true
+    });
+}
+
+function obtenerId() {
+
+    var table = $('#table-historial').DataTable();
+    var id = 0;
+    if (table.$('.selected')[0] !== undefined) {
+        console.log("so it was defined");
+
+        var selectedIndex = table.$('.selected')[0]._DT_RowIndex; //should be .index();   ??
+        //console.log("Selected index: " + selectedIndex);
+        var row = table.row(selectedIndex).data();
+        id = row.Id;
+    }
+    return id;
 }
