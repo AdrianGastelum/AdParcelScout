@@ -25,6 +25,11 @@ namespace ParcelScout.Controllers
             return View();
         }
 
+        public ActionResult RegistrarNuevoEnvioForm()
+        {
+            return PartialView("~/Views/Paquete/RegistrarNuevoEnvioForm.cshtml");
+        }
+
         public ActionResult EditInfoPedido()
         {
             return PartialView("~/Views/Paquete/EditInfoPedido.cshtml");

@@ -172,6 +172,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\ValidateSession.cs" />
+    <Compile Include="Controllers\EnvioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaqueteController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -202,6 +203,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\js\paquete.js" />
+    <Content Include="Scripts\js\registroenvio.js" />
     <Content Include="Scripts\js\usuario.js" />
     <Content Include="Scripts\js\vista-envio.js" />
     <Content Include="Scripts\respond.js" />
@@ -233,6 +235,9 @@
     <Content Include="Views\Paquete\EditInfoPedido.cshtml" />
     <Content Include="Views\Paquete\EditInfoCliente.cshtml" />
     <Content Include="Views\Paquete\EditInfoDestinatario.cshtml" />
+    <Content Include="Views\Envio\AgregarEnvio2.cshtml" />
+    <Content Include="Views\Envio\AgregarEnvio.cshtml" />
+    <Content Include="Views\Paquete\RegistrarNuevoEnvioForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
