@@ -35,7 +35,7 @@ $('#btnNext').on("click", function () {
             $('#btnSubmit').show();
         }
     } else {
-        alert('No se han llenado todos los campos');
+        swal("Oops", "¡No se llenaron todos los campos!", "error");
     }
 
 });
@@ -100,11 +100,11 @@ $('#btnSubmit').on("click", function () {
 
 
 
-        alert('Se han agregado los campos con exito');
+        swal("Excelente", "¡Se han almacenado los datos exitosamente!", "success");
 
 
     } else {
-        alert('No se han llenado todos los campos');
+        swal("Oops", "¡No se llenaron todos los campos!", "error");
     }
 });
 
