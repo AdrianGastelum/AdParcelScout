@@ -30,6 +30,8 @@ namespace ParcelScout.Controllers
             return PartialView("~/Views/Paquete/RegistrarNuevoEnvioForm.cshtml");
         }
 
+
+        /*Modals VistaEnvio*/
         public ActionResult EditInfoPedido()
         {
             return PartialView("~/Views/Paquete/EditInfoPedido.cshtml");
@@ -106,6 +108,64 @@ namespace ParcelScout.Controllers
             }
             else
             {
+                action = Content("false");
+            }
+
+            return action;
+        }
+
+        /*Modals Maps API*/
+        public ActionResult MapaNuevaUbicacion() {
+            /*ASK FOR SOME PARAMETERS FOR CENTER FIXED IN PREVIOUS LOCATION*/
+            return PartialView("~/Views/Paquete/MapaNuevaUbicacion.cshtml");
+        }
+
+        public ActionResult GuardarNuevoEnvio(int idEmpleado,
+
+                double paquetePeso, string paqueteDimensiones, string paqueteTipo,
+                string paqueteDescripcion, double paquetePrecio,
+
+                string clienteNombre, string clienteDomicilio,
+                string clienteTelefono1, string clienteTelefono2, string clienteTelefono3,
+                string clienteCorreo, string clienteRfc,
+
+                string destinatarioNombre, string destinatarioTelefono, string destinatarioCorreo,
+                string destinatarioCalle, string destinatarioNumero, string destinatarioAvenida,
+                string destinatarioColonia, string destinatarioCodigo, string destinatarioCiudad,
+                string destinatarioEstado, string destinatarioReferencia, string destinatarioPersona) {
+            ActionResult action = null;
+
+            Usuario u = Usuario.ObtenerPorId(idEmpleado);
+
+            Cliente c = new Cliente();
+            c.Nombre = clienteNombre;
+            c.Domicilio = clienteDomicilio;
+            c.Telefono1 = clienteTelefono1;
+            c.Telefono2 = clienteTelefono2;
+            c.Telefono3 = clienteTelefono3;
+            c.Correo = clienteCorreo;
+            c.RFC = clienteRfc;
+
+            Destinatario d = new Destinatario();
+            d.Nombre = destinatarioNombre;
+            d.Domicilio = "Calle: " + destinatarioCalle +
+                        ", Av. " + destinatarioAvenida +
+                        ", Col. " + destinatarioColonia +
+                        ", Num: " + destinatarioNumero +
+                        ", Ref. " + destinatarioReferencia;
+            d.Telefono = destinatarioTelefono;
+            d.Correo = destinatarioCorreo;
+            d.CodigoPostal = destinatarioCodigo;
+            d.Ciudad = destinatarioCiudad;
+            d.Estado = destinatarioEstado;
+            d.Recibe = destinatarioPersona;
+
+
+
+
+            if (Envio.Guardar(u, paquetePeso, paqueteDimensiones ,paqueteTipo, paqueteDescripcion, paquetePrecio, c, d)) {
+                action = Content("true");
+            } else {
                 action = Content("false");
             }
 

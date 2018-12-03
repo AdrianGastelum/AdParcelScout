@@ -453,3 +453,39 @@ function obtenerId() {
     }
     return id;
 }
+
+//MAPA NUEVA UBICACION
+function nuevaUbicacion() {
+    modalC = $('#modal-nueva-ubicacion-cont');
+
+    $('#modal-nueva-ubicacion').modal();
+    modalC.load(baseUrl + 'Paquete/MapaNuevaUbicacion', function () {
+        cargarMapaDrag();
+    });
+}
+
+function cargarMapaDrag() {
+    mapC = $('#mapa-drag');
+
+    var coords = new google.maps.LatLng(27.9178651, -110.90893779999999, true);
+
+    var map = new google.maps.Map(document.getElementById('mapa-drag'), {
+        center: { lat: 27.9178651, lng: -110.90893779999999},
+        zoom: 12
+    });
+
+    var marker = new google.maps.Marker({
+        position: coords,
+        map: map,
+        title: "SELECCIONA",
+        draggable: true
+    });
+
+    $('#btn-sel-ub').click(function(){
+        var latlng = marker.getPosition();
+
+        $('#lat-drag').val(latlng.lat());
+        $('#lon-drag').val(latlng.lng());
+    });
+
+}

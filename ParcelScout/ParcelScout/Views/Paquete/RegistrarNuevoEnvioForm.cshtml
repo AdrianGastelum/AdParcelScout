@@ -9,7 +9,8 @@
     <h4 class="modal-title">Registrar Nuevo Paquete</h4>
 </div>
 <div class="modal-body">
-   
+
+
         <div class="row">
             <div class="col-xs-10 col-xs-push-1">
                 <h2>Registrar un nuevo envío</h2>
@@ -26,19 +27,19 @@
                                 <input type="text" class="form-control" name="paquete-peso">
                             </div>
                             <div class="form-group">
-                                <label for="dimensiones">dimensiones (Alto*Ancho*Largo):</label>
+                                <label for="dimensiones">Dimensiones (Alto*Ancho*Largo):</label>
                                 <input type="text" class="form-control" name="paquete-dimensiones">
                             </div>
                             <div class="form-group">
-                                <label for="tipo">Tipo de paquete</label>
+                                <label for="tipo">Tipo de paquete:</label>
                                 <input type="text" class="form-control" name="paquete-tipo">
                             </div>
                             <div class="from-group">
-                                <label for="descripcion">Descripcion</label>
+                                <label for="descripcion">Descripcion:</label>
                                 <input type="text" class="form-control" name="paquete-descripcion">
                             </div>
                             <div class="form-group">
-                                <label for="precio">Precio</label>
+                                <label for="precio">Precio:</label>
                                 <input type="text" class="form-control" name="paquete-precio">
                             </div>
                             <br>
@@ -64,12 +65,20 @@
                                     <input type="text" class="form-control" name="cliente-domicilio">
                                 </div>
                                 <div class="form-group">
-                                    <label for="cliente-telefono">Telefono:</label>
-                                    <input type="text" class="form-control" name="cliente-telefono">
+                                    <label for="cliente-telefono1">Telefono 1:</label>
+                                    <input type="text" class="form-control" name="cliente-telefono1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cliente-telefono2">Telefono 2 (Opcional):</label>
+                                    <input type="text" class="form-control" name="cliente-telefono2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cliente-telefono3">Telefono 3 (Opcional):</label>
+                                    <input type="text" class="form-control" name="cliente-telefono3">
                                 </div>
                                 <div class="form-group">
                                     <label for="cliente-correo">Correo:</label>
-                                    <input type="text" class="form-control" name="cliente-correo">
+                                    <input type="email" class="form-control" name="cliente-correo">
                                 </div>
                                 <div class="form-group">
                                     <label for="cliente-rfc">RFC (Opcional):</label>
@@ -128,16 +137,21 @@
                                     <input type="text" class="form-control" name="destinatario-codigo">
                                 </div>
                                 <div class="form-group">
-                                    <label for="destinatario-ciudadestado">Ciudad y estado:</label>
-                                    <input type="text" class="form-control" name="destinatario-ciudadestado">
+                                    <label for="destinatario-ciudad">Ciudad:</label>
+                                    <input type="text" class="form-control" name="destinatario-ciudad">
                                 </div>
+                                <div class="form-group">
+                                    <label for="destinatario-estado">Estado:</label>
+                                    <input type="text" class="form-control" name="destinatario-estado">
+                                </div>
+
                                 <div class="form-group">
                                     <label for="destinatario-referencia">Referencia:</label>
                                     <input type="text" class="form-control" name="destinatario-referencia">
                                 </div>
                                 <hr />
                                 <div class="form-group">
-                                    <label for="destinatario-persona">Persona que recibira el paquete (Opcional)</label>
+                                    <label for="destinatario-persona">Persona que recibira el paquete (Opcional):</label>
                                     <input type="text" class="form-control" name="destinatario-persona">
                                 </div>
                                 <br>

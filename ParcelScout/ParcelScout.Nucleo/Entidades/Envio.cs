@@ -117,8 +117,8 @@ namespace ParcelScout.Nucleo.Entidades
             return e;
         }
 
-        public static bool Guardar(Usuario empleado, double peso, string tipoContenido, string descripcion,
-                                    double precio, string noRastreo, Cliente cliente, Destinatario destinatario)
+        public static bool Guardar(Usuario empleado, double peso, string dimensiones, string tipoContenido, string descripcion,
+                                    double precio, Cliente cliente, Destinatario destinatario)
         {
             bool realizado = false;
 
@@ -130,10 +130,10 @@ namespace ParcelScout.Nucleo.Entidades
                 e.FechaCreacion = DateTime.Now;
                 e.Empleado = empleado;
                 e.Peso = peso;
+                e.Dimensiones = dimensiones;
                 e.TipoContenido = tipoContenido;
                 e.Descripcion = descripcion;
                 e.Precio = precio;
-                e.NoRastreo = noRastreo;
                 e.Cliente = cliente;
                 e.Destinatario = destinatario;
                 e.Estado = Estado.EN_PROCESO;

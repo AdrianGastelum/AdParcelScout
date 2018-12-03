@@ -177,7 +177,7 @@
             <h2>Historial de Recorrido:</h2>
 
             <div class="btn-group">
-                <button type="button" onclick="" class="btn btn-seagreen">Agregar ubicación</button>
+                <button type="button" onclick="nuevaUbicacion()" class="btn btn-seagreen">Agregar ubicación</button>
                 <button type="button" onclick="" class="btn btn-seagreen">Ver Recorrido</button>
                 <button type="button" onclick="" class="btn btn-seagreen">Modificar</button>
                 <button type="button" onclick="" class="btn btn-seagreen">Eliminar</button>
@@ -189,7 +189,7 @@
 
         <div class="row">
 
-            <table id="table-historial"class="table tabla-ubicacion table-nonfluid col-xs-2">
+            <table id="table-historial" class="table tabla-ubicacion table-nonfluid col-xs-2">
                 <thead>
                     <tr>
                         <th id="id" hidden>Id</th>
@@ -200,9 +200,7 @@
                         <th>Longitud</th>
                     </tr>
                 </thead>
-                <tbody>
-                   
-                </tbody>
+                <tbody></tbody>
             </table>
 
         </div>
@@ -277,6 +275,18 @@
     </div>
 </div>
 
+<!--NUEVA UBICACION-->
+<div class="modal fade" id="modal-nueva-ubicacion" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" id="modal-nueva-ubicacion-cont">
+
+        </div>
+
+    </div>
+</div>
+
 <!--RECORRIDO-->
 <div class="modal fade" id="modal-recorrido" role="dialog">
     <div class="modal-dialog">
@@ -291,5 +301,10 @@
 
 @Scripts.Render("~/Scripts/js/vista-envio.js")
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVMv87GLZkEtKWLUh5zw0Dm9-qLQ7NOLU"
+        async defer></script>
 
-
+<!--
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVMv87GLZkEtKWLUh5zw0Dm9-qLQ7NOLU&callback=initMap"
+        async defer></script>
+    -->

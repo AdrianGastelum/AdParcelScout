@@ -202,6 +202,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\js\mapas.js" />
     <Content Include="Scripts\js\paquete.js" />
     <Content Include="Scripts\js\registroenvio.js" />
     <Content Include="Scripts\js\usuario.js" />
@@ -238,6 +239,7 @@
     <Content Include="Views\Envio\AgregarEnvio2.cshtml" />
     <Content Include="Views\Envio\AgregarEnvio.cshtml" />
     <Content Include="Views\Paquete\RegistrarNuevoEnvioForm.cshtml" />
+    <Content Include="Views\Paquete\MapaNuevaUbicacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

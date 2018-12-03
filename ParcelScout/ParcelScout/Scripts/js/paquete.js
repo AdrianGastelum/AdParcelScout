@@ -49,7 +49,14 @@ function ver() {
 }
 
 function nuevo() {
-    var modalC = $('#modal-registrar-envio-cont');
-    $('#modal-registrar-envio').modal();
-    modalC.load(baseUrl + 'Paquete/RegistrarNuevoEnvioForm/', function () { });
+    if ($('#usuario-id').val() !== "") {
+        var modalC = $('#modal-registrar-envio-cont');
+        $('#modal-registrar-envio').modal();
+        modalC.load(baseUrl + 'Paquete/RegistrarNuevoEnvioForm/', function () { });
+    } else {
+        swal({
+            text: "No tiene permitido esta acción.",
+            icon: "warning"
+        });
+    }
 }
