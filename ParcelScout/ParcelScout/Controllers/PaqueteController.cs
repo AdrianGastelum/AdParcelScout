@@ -120,6 +120,10 @@ namespace ParcelScout.Controllers
             return PartialView("~/Views/Paquete/MapaNuevaUbicacion.cshtml");
         }
 
+        public ActionResult MapaRecorrido() {
+            return PartialView("~/Views/Paquete/MapaRecorrido.cshtml");
+        }
+
         public ActionResult GuardarNuevoEnvio(int idEmpleado,
 
                 double paquetePeso, string paqueteDimensiones, string paqueteTipo,

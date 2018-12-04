@@ -139,6 +139,11 @@ pagination > .active > a, .pagination > .active > span, .pagination > .active > 
 
 }
 
+#mapa-recorrido {
+    height: 300px;
+
+}
+
 
 /*Nav del form de nuevo paquete*/
 #nav-from {

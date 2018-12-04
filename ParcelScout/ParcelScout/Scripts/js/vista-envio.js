@@ -457,14 +457,64 @@ function nuevaUbicacion() {
 
     $('#modal-nueva-ubicacion').modal();
     modalC.load(baseUrl + 'Paquete/MapaNuevaUbicacion', function () {
-        cargarMapaDrag();
+        cargarUltimaUbicacion();
     });
 }
 
 function cargarUltimaUbicacion() {
+    var idEnvio = $.trim($('#envio-id').val());
 
-    var id = $('#envio-id').val();
+    $.ajax({
+        url: baseUrl + "Paquete/ObtenerHistorialEnvio/",
+        data: { idEnvio: idEnvio },
+        traditional: true,
+        cache: false,
+        success: function (data) {
+           
+            if (data.data.length > 0){
 
+
+                var lat = data.data[data.data.length - 1].Lat;
+                var lng = data.data[data.data.length - 1].Lon;
+
+                cargarMapaDragUltimo(lat, lng);
+                
+            } else {
+                cargarMapaDrag();
+            }
+        },
+        error: function (xhr, exception) {
+            cargarMapaDrag();
+        }
+    });
+
+}
+
+function cargarMapaDragUltimo(lat, lng) {
+    mapC = $('#mapa-drag');
+
+    var coords = new google.maps.LatLng(lat, lng, true);
+
+    var map = new google.maps.Map(document.getElementById('mapa-drag'), {
+        center: { lat: lat, lng: lng },
+        zoom: 12
+    });
+
+    var marker = new google.maps.Marker({
+        position: coords,
+        map: map,
+        title: "SELECCIONA",
+        draggable: true
+    });
+
+    $('#btn-sel-ub').click(function () {
+        var latlng = marker.getPosition();
+
+        $('#lat-drag').val(latlng.lat());
+        $('#lon-drag').val(latlng.lng());
+    });
+
+    google.maps.event.trigger(map, "resize");
 
 }
 
@@ -524,8 +574,9 @@ function guardarUbicacion() {
                 data: { id: id, lat: lat, lon: lon, ciudad: ciudad, estado: estado},
                 traditional: true,
                 cache: false,
-                sucess: function (data) {
-                    if (data === "true"){
+                success: function (data) {
+                    if (data === "true") {
+
                         swal({
                             text: "Ubicación Actualizada",
                             icon: "warning"
@@ -563,3 +614,85 @@ function guardarUbicacion() {
         });
     }
 }
+
+function verRecorrido() {
+    var modalC = $('#modal-recorrido-cont');
+
+    $('#modal-recorrido').modal();
+    modalC.load(baseUrl + "Paquete/MapaRecorrido", function () {
+        cargarHistorialRecorrido();
+    });
+
+}
+
+function cargarHistorialRecorrido() {
+    var idEnvio = $.trim($('#envio-id').val());
+
+    $.ajax({
+        url: baseUrl + "Paquete/ObtenerHistorialEnvio/",
+        data: { idEnvio: idEnvio },
+        traditional: true,
+        cache: false,
+        success: function (data) {
+
+            if (data.data.length > 0) {
+                
+                var ubicaciones = data.data;
+
+
+                cargarMapaRecorrido(ubicaciones);
+            } else {
+                cargarMapaDrag();
+            }
+        },
+        error: function (xhr, exception) {
+            cargarMapaDrag();
+        }
+    });
+
+}
+
+function cargarMapaRecorrido(ubicaciones) {
+
+    var center = {
+        lat: ubicaciones[ubicaciones.length - 1].Lat, lng: ubicaciones[ubicaciones.length - 1].Lon
+   };
+    var markers = []; //google.map.marker
+    var recorrido = []; // {lat: lng:}
+
+    var map = new google.maps.Map(document.getElementById('mapa-recorrido'), {
+        center: { lat: center.lat, lng: center.lng },
+        zoom: 7
+    });
+
+    for (var i = 0; i < ubicaciones.length; i++) {
+        var coords = { lat: ubicaciones[i].Lat, lng: ubicaciones[i].Lon }
+        recorrido.push(coords);
+    }
+
+    for (var ii = 0; ii < recorrido.length; ii++){
+        var latlng = new google.maps.LatLng(recorrido[ii].lat, recorrido[ii].lng, true);
+
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: "Lat: " + latlng.lat() + ", Lng: " + latlng.lng(),
+        });
+
+        markers.push(marker);
+    }
+
+    var lineaRecorrido = new google.maps.Polyline({
+        path: recorrido,
+        geodesic: true,
+        strokeColor: '#33a364',
+        strokeOpacity: 1.0,
+        strokeWeight: 3,
+        map: map
+    });
+
+
+    google.maps.event.trigger(map, "resize");
+
+}
+
