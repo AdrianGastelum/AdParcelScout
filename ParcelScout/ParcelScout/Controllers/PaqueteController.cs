@@ -163,7 +163,7 @@ namespace ParcelScout.Controllers
 
 
 
-            if (Envio.Guardar(u, paquetePeso, paqueteDimensiones ,paqueteTipo, paqueteDescripcion, paquetePrecio, c, d)) {
+            if (Envio.Guardar(u, paquetePeso, paqueteDimensiones, paqueteTipo, paqueteDescripcion, paquetePrecio, c, d)) {
                 action = Content("true");
             } else {
                 action = Content("false");
@@ -202,6 +202,41 @@ namespace ParcelScout.Controllers
 
         }
 
+        public ActionResult ObtenerPorNoRastreo(string noRastreo)
+        {
+            try
+            {
+
+                Envio envio = Envio.ObtenerPorNoRastreo(noRastreo);
+
+                return Json(new { envio }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+        }
+
+        public ActionResult GuardarUbicacion(int id, double lat, double lon, string ciudad, string estado)
+        {
+            ActionResult action = null;
+
+            RegistroUbicacion ru = new RegistroUbicacion();
+            ru.Lat = lat;
+            ru.Lon = lon;
+            ru.Fecha = DateTime.Now;
+            ru.Ciudad = ciudad;
+            ru.Estado = estado;
+
+            if (Envio.AgregarUbicacion(id, ru)) {
+                action = Content("true");
+            } else {
+                action = Content("false");
+            }
+
+            return action;
+        }
 
         public ActionResult ObtenerHistorialEnvio(int idEnvio) {
 
@@ -215,6 +250,7 @@ namespace ParcelScout.Controllers
             }
 
         }
+
 
 
         //public ActionResult PruebaGuardado() {

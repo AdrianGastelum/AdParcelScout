@@ -117,6 +117,46 @@ namespace ParcelScout.Nucleo.Entidades
             return e;
         }
 
+        public static Envio ObtenerPorNoRastreo(string noRastreo)
+        {
+            Envio e = new Envio();
+            try
+            {
+                using (ISession session = Persistent.SessionFactory.OpenSession())
+                {
+                    ICriteria crit = session.CreateCriteria(e.GetType());
+                    crit.Add(Expression.Eq("NoRastreo", noRastreo));
+                    e = (crit.UniqueResult<Envio>());
+
+                    e.fechaString = e.FechaCreacion.ToString("MM/dd/yyyy HH:mm:ss");
+
+                    switch (e.Estado)
+                    {
+                        case Estado.EN_PROCESO:
+                            e.estadoString = "En Proceso";
+                            break;
+                        case Estado.ENVIADO:
+                            e.estadoString = "Enviado";
+                            break;
+                        case Estado.RECIBIDO:
+                            e.estadoString = "Recibido";
+                            break;
+                        case Estado.CANCELADO:
+                            e.estadoString = "Cancelado";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return e;
+        }
+
         public static bool Guardar(Usuario empleado, double peso, string dimensiones, string tipoContenido, string descripcion,
                                     double precio, Cliente cliente, Destinatario destinatario)
         {
@@ -211,6 +251,24 @@ namespace ParcelScout.Nucleo.Entidades
             catch (Exception ex)
             {
                 throw ex;
+            }
+
+            return realizado;
+        }
+
+        public static bool AgregarUbicacion(int id, RegistroUbicacion ru) {
+            bool realizado = false;
+
+            try {
+                Envio e = ObtenerPorId(id);
+
+                e.Historial.Add(ru);
+
+                e.Update();
+
+                realizado = true;
+            } catch (Exception ex) {
+
             }
 
             return realizado;

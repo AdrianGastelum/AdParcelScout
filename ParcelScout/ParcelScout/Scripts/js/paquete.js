@@ -36,6 +36,20 @@ function obtenerId() {
     return id;
 }
 
+function obtenerNoRastreo() {
+
+    var table = $('#table-envios').DataTable();
+    var folio = 0;
+    if (table.$('.selected')[0] !== undefined) {
+        console.log("so it was defined");
+
+        var selectedIndex = table.$('.selected')[0]._DT_RowIndex; //should be .index();   ??
+        console.log("Selected index: " + selectedIndex);
+        var row = table.row(selectedIndex).data();
+        folio = row.Folio;
+    }
+    return id;
+}
 
 function ver() {
     var id = obtenerId();
