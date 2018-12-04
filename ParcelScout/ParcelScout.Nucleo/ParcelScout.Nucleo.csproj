@@ -81,6 +81,7 @@
     <Compile Include="Entidades\Destinatario.cs" />
     <Compile Include="Entidades\Envio.cs" />
     <Compile Include="Entidades\Estado.cs" />
+    <Compile Include="Entidades\Perfil.cs" />
     <Compile Include="Entidades\Persistent.cs" />
     <Compile Include="Entidades\RegistroUbicacion.cs" />
     <Compile Include="Entidades\Usuario.cs" />

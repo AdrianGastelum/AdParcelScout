@@ -43,6 +43,12 @@ namespace ParcelScout.Controllers
                 Usuario u = Usuario.ObtenerPorLogin(correo, password);
 
                 if (u != null) {
+
+                    HttpCookie ck = new HttpCookie("ckSolicitud");
+                    ck.Values.Add("perfilUsuario", ((int)u.Perfil).ToString());
+                    ck.Expires = DateTime.Now.AddHours(8);
+                    Response.Cookies.Add(ck);
+
                     Session["usuario-id"] = u.Id;
                     Session["usuario-nombre"] = u.Nombre;
                     Session["usuario-cuenta"] = u.Cuenta;

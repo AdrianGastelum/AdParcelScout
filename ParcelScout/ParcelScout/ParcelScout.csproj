@@ -238,6 +238,7 @@
     <Content Include="Views\Paquete\RegistrarNuevoEnvioForm.cshtml" />
     <Content Include="Views\Paquete\MapaNuevaUbicacion.cshtml" />
     <Content Include="Views\Paquete\MapaRecorrido.cshtml" />
+    <Content Include="Views\Paquete\MapaModificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

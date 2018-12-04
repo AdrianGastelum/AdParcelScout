@@ -642,7 +642,12 @@ function cargarHistorialRecorrido() {
 
                 cargarMapaRecorrido(ubicaciones);
             } else {
-                cargarMapaDrag();
+
+                swal({
+                    text: "El historial esta vacio",
+                    icon: "info"
+                });
+
             }
         },
         error: function (xhr, exception) {
@@ -676,7 +681,7 @@ function cargarMapaRecorrido(ubicaciones) {
         var marker = new google.maps.Marker({
             position: latlng,
             map: map,
-            title: "Lat: " + latlng.lat() + ", Lng: " + latlng.lng(),
+            title: "Lat: " + latlng.lat() + ", Lng: " + latlng.lng()
         });
 
         markers.push(marker);
@@ -696,3 +701,19 @@ function cargarMapaRecorrido(ubicaciones) {
 
 }
 
+function modificarRegistro() {
+    var id = obtenerId();
+
+    if (id !== 0){
+
+        var asdf;
+
+    } else {
+        swal({
+            text: "Seleccione un elemento de la tabla",
+            icon: "info"
+        });
+
+    }
+
+}
