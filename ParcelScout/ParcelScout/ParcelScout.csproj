@@ -172,7 +172,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\ValidateSession.cs" />
-    <Compile Include="Controllers\EnvioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaqueteController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -235,8 +234,6 @@
     <Content Include="Views\Paquete\EditInfoPedido.cshtml" />
     <Content Include="Views\Paquete\EditInfoCliente.cshtml" />
     <Content Include="Views\Paquete\EditInfoDestinatario.cshtml" />
-    <Content Include="Views\Envio\AgregarEnvio2.cshtml" />
-    <Content Include="Views\Envio\AgregarEnvio.cshtml" />
     <Content Include="Views\Paquete\RegistrarNuevoEnvioForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
