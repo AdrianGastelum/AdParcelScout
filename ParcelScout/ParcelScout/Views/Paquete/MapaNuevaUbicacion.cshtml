@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "MapaNuevaUbicacion";
+}
+
+
+
+<div class="modal-header modal-header-sienna">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Nueva Ubicación</h4>
+</div>
+<div class="modal-body">
+
+    <div class="row">
+
+            <div id="mapa-drag" class="col-xs-10 col-xs-push-1"></div>
+
+    </div>
+    <br />
+
+    <div class="row">
+            <button type="button" class="btn btn-sm btn-seagreen col-xs-4 col-xs-push-4" id="btn-sel-ub">Seleccionar</button>
+    </div>
+
+    <br />
+
+    <div class="row">
+        
+
+        <form action="" class="col-xs-10 col-xs-push-1">
+            <input type="hidden" value="" id="ubicacion-id">
+            <div class="form-group form-horizontal">
+                <label for="lat">Lat:</label>
+                <input type="text" class="form-control input-sm" name="lat" id="lat-drag">
+            </div>
+            <div class="form-group form-horizontal">
+                <label for="lon">Lon:</label>
+                <input type="text" class="form-control input-sm" name="lon" id="lon-drag">
+            </div>
+            <div class="form-group">
+                <label for="ciudad">Ciudad:</label>
+                <input type="email" class="form-control input-sm" name="ciudad" id="ciudad-drag">
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <input type="text" class="form-control input-sm" name="estado" id="estado-drag">
+            </div>
+
+            <button type="button" class="btn btn-seagreen pull-right shadow" onclick="guardarUbicacion()">Guardar</button>
+        </form>
+
+        <!--Row form end-->
+    </div>
+
+    <!--Modal body-->
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+</div>

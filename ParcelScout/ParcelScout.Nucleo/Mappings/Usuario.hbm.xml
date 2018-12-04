@@ -20,5 +20,10 @@
     <property name="Rol" type="string">
       <column name="rol"/>
     </property>
+    <property name="Perfil" type="ParcelScout.Nucleo.Entidades.Perfil, ParcelScout.Nucleo">
+      <column name="perfil"/>
+    </property>
+
+
   </class>
 </hibernate-mapping>

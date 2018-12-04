@@ -36,6 +36,20 @@ function obtenerId() {
     return id;
 }
 
+function obtenerNoRastreo() {
+
+    var table = $('#table-envios').DataTable();
+    var folio = 0;
+    if (table.$('.selected')[0] !== undefined) {
+        console.log("so it was defined");
+
+        var selectedIndex = table.$('.selected')[0]._DT_RowIndex; //should be .index();   ??
+        console.log("Selected index: " + selectedIndex);
+        var row = table.row(selectedIndex).data();
+        folio = row.Folio;
+    }
+    return id;
+}
 
 function ver() {
     var id = obtenerId();
@@ -49,7 +63,14 @@ function ver() {
 }
 
 function nuevo() {
-    var modalC = $('#modal-registrar-envio-cont');
-    $('#modal-registrar-envio').modal();
-    modalC.load(baseUrl + 'Paquete/RegistrarNuevoEnvioForm/', function () { });
+    if ($('#usuario-id').val() !== "") {
+        var modalC = $('#modal-registrar-envio-cont');
+        $('#modal-registrar-envio').modal();
+        modalC.load(baseUrl + 'Paquete/RegistrarNuevoEnvioForm/', function () { });
+    } else {
+        swal({
+            text: "No tiene permitido esta acción.",
+            icon: "warning"
+        });
+    }
 }

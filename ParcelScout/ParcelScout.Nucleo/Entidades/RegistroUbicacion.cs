@@ -117,6 +117,7 @@ namespace ParcelScout.Nucleo.Entidades
             {
 
                 RegistroUbicacion ru = ObtenerPorId(id);
+                ru.Fecha = DateTime.Now;
                 ru.Ciudad = ciudad;
                 ru.Estado = estado;
                 ru.Lat = lat;

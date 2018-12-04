@@ -132,6 +132,19 @@ pagination > .active > a, .pagination > .active > span, .pagination > .active > 
 
 }
 
+/*MAPAS*/
+#mapa-drag {
+    height: 300px;
+
+
+}
+
+#mapa-recorrido {
+    height: 300px;
+
+}
+
+
 /*Nav del form de nuevo paquete*/
 #nav-from {
     background-color:none;

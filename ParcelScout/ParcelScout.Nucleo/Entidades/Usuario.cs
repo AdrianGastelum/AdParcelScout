@@ -17,6 +17,7 @@ namespace ParcelScout.Nucleo.Entidades
         public string Cuenta { get; set; }
         public string Password { get; set; }
         public string Rol { get; set; }
+        public Perfil Perfil { get; set; }
 
         public static IList<Usuario> ObtenerTodos()
         {
@@ -34,6 +35,7 @@ namespace ParcelScout.Nucleo.Entidades
                         .Add(Projections.Property("Correo"), "Correo")
                         .Add(Projections.Property("Cuenta"), "Cuenta")
                         .Add(Projections.Property("Rol"), "Rol")
+                        .Add(Projections.Property("Perfil"), "Perfil")
                         );
                     crit.SetResultTransformer(Transformers.AliasToBean<Usuario>());
 
@@ -70,7 +72,7 @@ namespace ParcelScout.Nucleo.Entidades
             return u;
         }
 
-        public static bool Guardar(string nombre, string cuenta, string correo, string password, string rol)
+        public static bool Guardar(string nombre, string cuenta, string correo, string password, string rol, Perfil perfil)
         {
             bool realizado = false;
             try
@@ -82,6 +84,7 @@ namespace ParcelScout.Nucleo.Entidades
                 u.Cuenta = cuenta;
                 u.Password = password;
                 u.Rol = rol;
+                u.Perfil = perfil;
                 u.Save();
                 realizado = true;
             }
@@ -93,7 +96,7 @@ namespace ParcelScout.Nucleo.Entidades
         }
 
         public static bool GuardarCambios(int id, string nombre, string cuenta,
-                                            string correo, string password, string rol)
+                                            string correo, string password, string rol, Perfil perfil)
         {
             bool realizado = false;
 
@@ -106,6 +109,7 @@ namespace ParcelScout.Nucleo.Entidades
                 u.Password = password;
                 u.Correo = correo;
                 u.Rol = rol;
+                u.Perfil = perfil;
                 u.Update();
 
                 realizado = true;

@@ -101,12 +101,12 @@ function cargarDatosPaquete(id) {
 }
 
 function actualizarPaquete() {
-    var id = $('#envio-id').val();
+    var id = $.trim($('#envio-id').val());
 
-    var peso = $('#peso-mod').val();
-    var dimensiones = $('#dimensiones-mod').val();
-    var tipocont = $('#tipocont-mod').val();
-    var descripcion = $('#descripcion-mod').val();
+    var peso = $.trim($('#peso-mod').val());
+    var dimensiones = $.trim($('#dimensiones-mod').val());
+    var tipocont = $.trim($('#tipocont-mod').val());
+    var descripcion = $.trim($('#descripcion-mod').val());
 
 
     $.ajax({
@@ -194,10 +194,10 @@ function cargarDatosEnvio(id) {
 }
 
 function actualizarEnvio() {
-    var id = $('#envio-id').val();
+    var id = $.trim($('#envio-id').val());
 
-    var precio = $('#precio-mod').val();
-    var estado = $('#estado-mod').val();
+    var precio = $.trim($('#precio-mod').val());
+    var estado = $.trim($('#estado-mod').val());
 
     $.ajax({
         url: baseUrl + 'Paquete/ActualizarInfoEnvio/',
@@ -275,15 +275,15 @@ function cargarDatosCliente(id) {
 }
 
 function actualizarCliente() {
-    var id = $('#id-c').val();
+    var id = $.trim($('#id-c').val());
 
-    var nombre = $('#nombre-c-mod').val();
-    var domicilio = $('#domicilio-c-mod').val();
-    var telefono1 = $('#telefono1-c-mod').val();
-    var telefono2 = $('#telefono2-c-mod').val();
-    var telefono3 = $('#telefono3-c-mod').val();
-    var correo = $('#correo-c-mod').val();
-    var rfc = $('#rfc-c-mod').val();
+    var nombre = $.trim($('#nombre-c-mod').val());
+    var domicilio = $.trim($('#domicilio-c-mod').val());
+    var telefono1 = $.trim($('#telefono1-c-mod').val());
+    var telefono2 = $.trim($('#telefono2-c-mod').val());
+    var telefono3 = $.trim($('#telefono3-c-mod').val());
+    var correo = $.trim($('#correo-c-mod').val());
+    var rfc = $.trim($('#rfc-c-mod').val());
 
     $.ajax({
         url: baseUrl + 'Paquete/ActualizarInfoCliente/',
@@ -363,16 +363,16 @@ function cargarDatosDestinatario(id) {
 }
 
 function actualizarDestinatario() {
-    var id = $('#id-d').val();
+    var id = $.trim($('#id-d').val());
 
-    var nombre = $('#nombre-d-mod').val();
-    var domicilio = $('#domicilio-d-mod').val();
-    var codigoPostal = $('#cp-d-mod').val();
-    var ciudad = $('#ciudad-d-mod').val();
-    var estado = $('#estado-d-mod').val();
-    var telefono = $('#telefono-d-mod').val();
-    var correo = $('#correo-d-mod').val();
-    var recibe = $('#recibe-d-mod').val();
+    var nombre = $.trim($('#nombre-d-mod').val());
+    var domicilio = $.trim($('#domicilio-d-mod').val());
+    var codigoPostal = $.trim($('#cp-d-mod').val());
+    var ciudad = $.trim($('#ciudad-d-mod').val());
+    var estado = $.trim($('#estado-d-mod').val());
+    var telefono = $.trim($('#telefono-d-mod').val());
+    var correo = $.trim($('#correo-d-mod').val());
+    var recibe = $.trim($('#recibe-d-mod').val());
 
     $.ajax({
         url: baseUrl + 'Paquete/ActualizarInfoDestinatario/',
@@ -414,9 +414,6 @@ function actualizarDestinatario() {
 function cargarTabla() {
     var id = $('#envio-id').val();
 
-    console.log("doing something");
-    console.log("this is the id: " + id);
-
     var table = $('#table-historial').DataTable();
     table.destroy();
     $('#table-historial').DataTable({
@@ -452,4 +449,271 @@ function obtenerId() {
         id = row.Id;
     }
     return id;
+}
+
+//MAPA NUEVA UBICACION
+function nuevaUbicacion() {
+    modalC = $('#modal-nueva-ubicacion-cont');
+
+    $('#modal-nueva-ubicacion').modal();
+    modalC.load(baseUrl + 'Paquete/MapaNuevaUbicacion', function () {
+        cargarUltimaUbicacion();
+    });
+}
+
+function cargarUltimaUbicacion() {
+    var idEnvio = $.trim($('#envio-id').val());
+
+    $.ajax({
+        url: baseUrl + "Paquete/ObtenerHistorialEnvio/",
+        data: { idEnvio: idEnvio },
+        traditional: true,
+        cache: false,
+        success: function (data) {
+           
+            if (data.data.length > 0){
+
+
+                var lat = data.data[data.data.length - 1].Lat;
+                var lng = data.data[data.data.length - 1].Lon;
+
+                cargarMapaDragUltimo(lat, lng);
+                
+            } else {
+                cargarMapaDrag();
+            }
+        },
+        error: function (xhr, exception) {
+            cargarMapaDrag();
+        }
+    });
+
+}
+
+function cargarMapaDragUltimo(lat, lng) {
+    mapC = $('#mapa-drag');
+
+    var coords = new google.maps.LatLng(lat, lng, true);
+
+    var map = new google.maps.Map(document.getElementById('mapa-drag'), {
+        center: { lat: lat, lng: lng },
+        zoom: 12
+    });
+
+    var marker = new google.maps.Marker({
+        position: coords,
+        map: map,
+        title: "SELECCIONA",
+        draggable: true
+    });
+
+    $('#btn-sel-ub').click(function () {
+        var latlng = marker.getPosition();
+
+        $('#lat-drag').val(latlng.lat());
+        $('#lon-drag').val(latlng.lng());
+    });
+
+    google.maps.event.trigger(map, "resize");
+
+}
+
+function cargarMapaDrag() {
+    mapC = $('#mapa-drag');
+
+    var coords = new google.maps.LatLng(27.9178651, -110.90893779999999, true);
+
+    var map = new google.maps.Map(document.getElementById('mapa-drag'), {
+        center: { lat: 27.9178651, lng: -110.90893779999999},
+        zoom: 12
+    });
+
+    var marker = new google.maps.Marker({
+        position: coords,
+        map: map,
+        title: "SELECCIONA",
+        draggable: true
+    });
+
+    $('#btn-sel-ub').click(function(){
+        var latlng = marker.getPosition();
+
+        $('#lat-drag').val(latlng.lat());
+        $('#lon-drag').val(latlng.lng());
+    });
+
+    google.maps.event.trigger(map, "resize");
+
+}
+
+function guardarUbicacion() {
+    var id = $.trim($('#envio-id').val());
+
+    var lat = $.trim($('#lat-drag').val());
+    var lon = $.trim($('#lon-drag').val());
+    var ciudad = $.trim($('#ciudad-drag').val());
+    var estado = $.trim($('#estado-drag').val());
+
+    var todoLleno = true;
+    var numericos = true;
+
+    if (id === "") todoLleno = false;
+    if (lat === "") todoLleno = false;
+    if (lon === "") todoLleno = false;
+    if (ciudad === "") todoLleno = false;
+    if (estado === "") todoLleno = false;
+
+    if (isNaN(lat)) numericos = false;
+    if (isNaN(lon)) numericos = false;
+
+    if (todoLleno){
+        if (numericos) {
+            
+            $.ajax({
+                url: baseUrl + "Paquete/GuardarUbicacion",
+                data: { id: id, lat: lat, lon: lon, ciudad: ciudad, estado: estado},
+                traditional: true,
+                cache: false,
+                success: function (data) {
+                    if (data === "true") {
+
+                        swal({
+                            text: "Ubicación Actualizada",
+                            icon: "warning"
+                        });
+
+                        $('#modal-nueva-ubicacion').modal("hide");
+                        cargarTabla();
+                    } else {
+                        swal({
+                            text: "Ocurrió un problema y no se pudo guardar ubicación.",
+                            icon: "warning"
+                        });
+                    }
+                },
+                error: function (xhr, exception) {
+                    swal({
+                        text: "Ocurrió un problema y no se pudo guardar ubicación.",
+                        icon: "warning"
+                    });
+                }
+            });
+
+           
+        } else {
+            swal({
+                title: "Error",
+                text: "Latitud y Longitud deben ser númericos, apoyate en el mapa para seleccionar su valor.",
+                icon: "error"
+            });
+        }
+    } else {
+        swal({
+            text: "Por favor llena todos los campos",
+            icon: "warning"
+        });
+    }
+}
+
+function verRecorrido() {
+    var modalC = $('#modal-recorrido-cont');
+
+    $('#modal-recorrido').modal();
+    modalC.load(baseUrl + "Paquete/MapaRecorrido", function () {
+        cargarHistorialRecorrido();
+    });
+
+}
+
+function cargarHistorialRecorrido() {
+    var idEnvio = $.trim($('#envio-id').val());
+
+    $.ajax({
+        url: baseUrl + "Paquete/ObtenerHistorialEnvio/",
+        data: { idEnvio: idEnvio },
+        traditional: true,
+        cache: false,
+        success: function (data) {
+
+            if (data.data.length > 0) {
+                
+                var ubicaciones = data.data;
+
+
+                cargarMapaRecorrido(ubicaciones);
+            } else {
+
+                swal({
+                    text: "El historial esta vacio",
+                    icon: "info"
+                });
+
+            }
+        },
+        error: function (xhr, exception) {
+            cargarMapaDrag();
+        }
+    });
+
+}
+
+function cargarMapaRecorrido(ubicaciones) {
+
+    var center = {
+        lat: ubicaciones[ubicaciones.length - 1].Lat, lng: ubicaciones[ubicaciones.length - 1].Lon
+   };
+    var markers = []; //google.map.marker
+    var recorrido = []; // {lat: lng:}
+
+    var map = new google.maps.Map(document.getElementById('mapa-recorrido'), {
+        center: { lat: center.lat, lng: center.lng },
+        zoom: 7
+    });
+
+    for (var i = 0; i < ubicaciones.length; i++) {
+        var coords = { lat: ubicaciones[i].Lat, lng: ubicaciones[i].Lon }
+        recorrido.push(coords);
+    }
+
+    for (var ii = 0; ii < recorrido.length; ii++){
+        var latlng = new google.maps.LatLng(recorrido[ii].lat, recorrido[ii].lng, true);
+
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: "Lat: " + latlng.lat() + ", Lng: " + latlng.lng()
+        });
+
+        markers.push(marker);
+    }
+
+    var lineaRecorrido = new google.maps.Polyline({
+        path: recorrido,
+        geodesic: true,
+        strokeColor: '#33a364',
+        strokeOpacity: 1.0,
+        strokeWeight: 3,
+        map: map
+    });
+
+
+    google.maps.event.trigger(map, "resize");
+
+}
+
+function modificarRegistro() {
+    var id = obtenerId();
+
+    if (id !== 0){
+
+        var asdf;
+
+    } else {
+        swal({
+            text: "Seleccione un elemento de la tabla",
+            icon: "info"
+        });
+
+    }
+
 }

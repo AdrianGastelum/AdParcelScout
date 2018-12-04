@@ -30,7 +30,16 @@ namespace ParcelScout.Controllers
         public ActionResult RegistrarUsuario(string nombre, string cuenta, string correo, string password, string permiso) {
             ActionResult action = null;
 
-            if (Usuario.Guardar(nombre, cuenta, correo, password, permiso))
+            Perfil p;
+
+            if (permiso == "admin") {
+
+                p = Perfil.ADMINISTRADOR;
+            } else {
+                p = Perfil.SOLO_LECTURA;
+            }
+
+            if (Usuario.Guardar(nombre, cuenta, correo, password, permiso, p))
             {
                 action = Content("true");
             }
@@ -93,11 +102,23 @@ namespace ParcelScout.Controllers
                                                 string contrasenaVieja, string contrasena, string permiso) {
             ActionResult action = null;
 
+            Perfil p;
+
+            if (permiso == "admin")
+            {
+
+                p = Perfil.ADMINISTRADOR;
+            }
+            else
+            {
+                p = Perfil.SOLO_LECTURA;
+            }
+
             try {
                 Usuario u = Usuario.ObtenerPorLogin(correo, contrasenaVieja);
 
                 if (u != null) {
-                    if (Usuario.GuardarCambios(id, nombre, cuenta, correo, contrasena, permiso)) {
+                    if (Usuario.GuardarCambios(id, nombre, cuenta, correo, contrasena, permiso, p)) {
                         action = Content("true");
                     } else {
                         action = Content("false");
