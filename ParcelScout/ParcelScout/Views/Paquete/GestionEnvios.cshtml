@@ -4,18 +4,16 @@
 }
 
 <div class="row">
-
-
-    <!--ROW END-->
-</div>
-
-<div class="row vp-100">
-
-    <div id="datatable-container" class="container">
-        <br />
-        <br />
+    <div class="container">
 
         <h1>Paquetería</h1>
+
+        <div class="row">
+
+        <!--ROW END-->
+        </div>
+
+        <br />
 
         <div class="row">
             <div class="btn-group">
@@ -23,10 +21,26 @@
                 <button type="button" onclick="ver()" class="btn btn-seagreen">Ver</button>
 
                 <!-- <button type="button" onclick="edit()" class="btn btn-seagreen">Editar</button>  -->
-                <button type="button" onclick="eliminar()" class="btn btn-seagreen">Eliminar</button>
+                @if((string)Session["usuario-rol"] == "admin")
+                {
+                    <button type="button" onclick="eliminarEnvio()" class="btn btn-seagreen">Eliminar</button>
+                }
+
+
             </div>
+        <!--ROW END-->
         </div>
 
+    </div>
+
+    <!--ROW END-->
+</div>
+
+<div class="row vp-100">
+
+    <div id="datatable-container" class="container">
+
+        
         <input type="hidden" value="@Session["usuario-id"]" id="usuario-id"/>
 
         <br />

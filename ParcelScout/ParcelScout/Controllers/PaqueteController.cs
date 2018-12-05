@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace ParcelScout.Controllers
 {
 
-    [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
+    [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR, Perfil.SOLO_LECTURA})]
     public class PaqueteController : Controller
     {
         // GET: Paquete
@@ -127,6 +127,10 @@ namespace ParcelScout.Controllers
             return PartialView("~/Views/Paquete/MapaRecorrido.cshtml");
         }
 
+        public ActionResult MapaModificar() {
+            return PartialView("~/Views/Paquete/MapaModificar.cshtml");
+        }
+
         public ActionResult GuardarNuevoEnvio(int idEmpleado,
 
                 double paquetePeso, string paqueteDimensiones, string paqueteTipo,
@@ -225,6 +229,19 @@ namespace ParcelScout.Controllers
 
         }
 
+        [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
+        public ActionResult EliminarEnvio(int id) {
+            ActionResult action = null;
+
+            if (Envio.Delete(id)) {
+                action = Content("true");
+            } else {
+                action = Content("false");
+            }
+
+            return action;
+        }
+
         public ActionResult GuardarUbicacion(int id, double lat, double lon, string ciudad, string estado)
         {
             ActionResult action = null;
@@ -258,7 +275,32 @@ namespace ParcelScout.Controllers
 
         }
 
+        public ActionResult ActualizarUbicacion(int id, string ciudad, string estado, double lat, double lon) {
+            ActionResult action = null;
 
+            if (RegistroUbicacion.GuardarCambios(id, ciudad, estado, lat, lon))
+            {
+
+                action = Content("true");
+
+            } else {
+                action = Content("false");
+            }
+
+            return action;
+        }
+
+        public ActionResult EliminarUbicacion(int id) {
+            ActionResult action = null;
+
+            if (RegistroUbicacion.Delete(id)) {
+                action = Content("true");
+            } else {
+                action = Content("false");
+            }
+
+            return action;
+        }
 
         //public ActionResult PruebaGuardado() {
         //    ActionResult action = null;

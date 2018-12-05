@@ -172,6 +172,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\ValidateSession.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaqueteController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -239,11 +240,13 @@
     <Content Include="Views\Paquete\MapaNuevaUbicacion.cshtml" />
     <Content Include="Views\Paquete\MapaRecorrido.cshtml" />
     <Content Include="Views\Paquete\MapaModificar.cshtml" />
+    <Content Include="Views\Shared\NavbarRes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Cliente\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

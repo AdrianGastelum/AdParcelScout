@@ -13,7 +13,7 @@
       <column name="fecha_creacion"/>
     </property>
 
-    <many-to-one name="Empleado" cascade="all-delete-orphan" class="ParcelScout.Nucleo.Entidades.Usuario, ParcelScout.Nucleo">
+    <many-to-one name="Empleado" cascade="save-update" class="ParcelScout.Nucleo.Entidades.Usuario, ParcelScout.Nucleo">
       <column name="usuario_id" />
     </many-to-one>
     
@@ -36,7 +36,7 @@
       <column name="no_rastreo"/>
     </property>
 
-    <many-to-one name="Cliente" cascade="all-delete-orphan" class="ParcelScout.Nucleo.Entidades.Cliente, ParcelScout.Nucleo">
+    <many-to-one name="Cliente" cascade="save-update" class="ParcelScout.Nucleo.Entidades.Cliente, ParcelScout.Nucleo">
       <column name="cliente_id" />
     </many-to-one>
 

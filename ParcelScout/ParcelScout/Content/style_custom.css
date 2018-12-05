@@ -97,6 +97,7 @@ form input {
     font-family: var(--fuente-principal);
     font-size: 16px;
     border-radius: 5px;
+
 }
 
 .btn-sienna {
@@ -133,14 +134,9 @@ pagination > .active > a, .pagination > .active > span, .pagination > .active > 
 }
 
 /*MAPAS*/
-#mapa-drag {
+#mapa-drag, #mapa-recorrido, #mapa-mod {
     height: 300px;
 
-
-}
-
-#mapa-recorrido {
-    height: 300px;
 
 }
 

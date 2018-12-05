@@ -1,4 +1,5 @@
-﻿using ParcelScout.Nucleo.Entidades;
+﻿using ParcelScout.Attributes;
+using ParcelScout.Nucleo.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +20,17 @@ namespace ParcelScout.Controllers
             return View();
         }
 
+        [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
         public ActionResult GestionUsuarios() {
             return View();
         }
 
+        [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
         public ActionResult Registro() {
             return View();
         }
 
+        [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
         public ActionResult RegistrarUsuario(string nombre, string cuenta, string correo, string password, string permiso) {
             ActionResult action = null;
 
@@ -77,11 +81,13 @@ namespace ParcelScout.Controllers
             }
         }
 
+        [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
         public ActionResult EditarRegistro(int id) {
             ViewBag.IdUsuario = id;
             return PartialView("~/Views/Usuario/EditarRegistro.cshtml");
         }
 
+        [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
         [HttpPost]
         public ActionResult ComprobarPwdViejo(string correo, string contrasenaVieja) {
             ActionResult action = null;
@@ -97,6 +103,7 @@ namespace ParcelScout.Controllers
             return action;
         }
 
+        [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
         [HttpPost]
         public ActionResult GuardarCambios(int id, string nombre, string cuenta, string correo,
                                                 string contrasenaVieja, string contrasena, string permiso) {
@@ -133,6 +140,7 @@ namespace ParcelScout.Controllers
             return action;
         }
 
+        [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
         public ActionResult Delete(int id)
         {
             ActionResult action = null;
@@ -148,6 +156,8 @@ namespace ParcelScout.Controllers
 
             return action;
         }
+
+
 
     }
 }
