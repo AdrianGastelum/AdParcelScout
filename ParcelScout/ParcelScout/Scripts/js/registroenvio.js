@@ -82,6 +82,9 @@ $('#btnSubmit').on("click", function () {
             var clienteRfc = $.trim($('input[name=cliente-rfc]').val());
         } else {
             console.log('Cliente existe');
+
+            var idCliente = clienteExistente;
+            //TODO CLIENTE EXISTE
         }
 
         if (destinatarioExistente === null) {
@@ -103,45 +106,87 @@ $('#btnSubmit').on("click", function () {
             console.log('Destinatario existe');
         }
 
-            
-        $.ajax({
-            url: baseUrl + "Paquete/GuardarNuevoEnvio",
-            data: {
-                idEmpleado: idEmpleado,
 
-                paquetePeso: paquetePeso, paqueteDimensiones: paqueteDimensiones, paqueteTipo: paqueteTipo,
-                paqueteDescripcion: paqueteDescripcion, paquetePrecio: paquetePrecio,
+        if (clienteExistente === null){
 
-                clienteNombre: clienteNombre, clienteDomicilio: clienteDomicilio,
-                clienteTelefono1: clienteTelefono1, clienteTelefono2: clienteTelefono2, clienteTelefono3: clienteTelefono3,
-                clienteCorreo: clienteCorreo, clienteRfc: clienteRfc,
+            $.ajax({
+                url: baseUrl + "Paquete/GuardarNuevoEnvio",
+                data: {
+                    idEmpleado: idEmpleado,
 
-                destinatarioNombre: destinatarioNombre, destinatarioTelefono: destinatarioTelefono, destinatarioCorreo: destinatarioCorreo,
-                destinatarioCalle: destinatarioCalle, destinatarioNumero: destinatarioNumero, destinatarioAvenida: destinatarioAvenida,
-                destinatarioColonia: destinatarioColonia, destinatarioCodigo: destinatarioCodigo, destinatarioCiudad: destinatarioCiudad,
-                destinatarioEstado: destinatarioEstado, destinatarioReferencia: destinatarioReferencia, destinatarioPersona: destinatarioPersona
-            },
-            traditional: true,
-            cache: false,
-            success: function (data) {
-                if (data === "true"){
-                    swal("Excelente", "¡Se han almacenado los datos exitosamente!", "success");
-                    $('#modal-registrar-envio').modal("hide");
-                    cargarTabla();
-                } else {
+                    paquetePeso: paquetePeso, paqueteDimensiones: paqueteDimensiones, paqueteTipo: paqueteTipo,
+                    paqueteDescripcion: paqueteDescripcion, paquetePrecio: paquetePrecio,
+
+                    clienteNombre: clienteNombre, clienteDomicilio: clienteDomicilio,
+                    clienteTelefono1: clienteTelefono1, clienteTelefono2: clienteTelefono2, clienteTelefono3: clienteTelefono3,
+                    clienteCorreo: clienteCorreo, clienteRfc: clienteRfc,
+
+                    destinatarioNombre: destinatarioNombre, destinatarioTelefono: destinatarioTelefono, destinatarioCorreo: destinatarioCorreo,
+                    destinatarioCalle: destinatarioCalle, destinatarioNumero: destinatarioNumero, destinatarioAvenida: destinatarioAvenida,
+                    destinatarioColonia: destinatarioColonia, destinatarioCodigo: destinatarioCodigo, destinatarioCiudad: destinatarioCiudad,
+                    destinatarioEstado: destinatarioEstado, destinatarioReferencia: destinatarioReferencia, destinatarioPersona: destinatarioPersona
+                },
+                traditional: true,
+                cache: false,
+                success: function (data) {
+                    if (data === "true") {
+                        swal("Excelente", "¡Se han almacenado los datos exitosamente!", "success");
+                        $('#modal-registrar-envio').modal("hide");
+                        cargarTabla();
+                    } else {
+                        swal({
+                            text: "Ocurrió un problema con la transacción.",
+                            icon: "error"
+                        });
+                    }
+                },
+                error: function (xhr, exception) {
                     swal({
                         text: "Ocurrió un problema con la transacción.",
                         icon: "error"
                     });
                 }
-            }, 
-            error: function (xhr, exception) {
-                swal({
-                    text: "Ocurrió un problema con la transacción.",
-                    icon: "error"
-                });
-            }
-        });
+            });
+
+        } else {
+            $.ajax({
+                url: baseUrl + "Paquete/GuardarNuevoEnvioConCliente",
+                data: {
+                    idEmpleado: idEmpleado,
+
+                    paquetePeso: paquetePeso, paqueteDimensiones: paqueteDimensiones, paqueteTipo: paqueteTipo,
+                    paqueteDescripcion: paqueteDescripcion, paquetePrecio: paquetePrecio,
+
+                    idCliente: idCliente,
+
+                    destinatarioNombre: destinatarioNombre, destinatarioTelefono: destinatarioTelefono, destinatarioCorreo: destinatarioCorreo,
+                    destinatarioCalle: destinatarioCalle, destinatarioNumero: destinatarioNumero, destinatarioAvenida: destinatarioAvenida,
+                    destinatarioColonia: destinatarioColonia, destinatarioCodigo: destinatarioCodigo, destinatarioCiudad: destinatarioCiudad,
+                    destinatarioEstado: destinatarioEstado, destinatarioReferencia: destinatarioReferencia, destinatarioPersona: destinatarioPersona
+                },
+                traditional: true,
+                cache: false,
+                success: function (data) {
+                    if (data === "true") {
+                        swal("Excelente", "¡Se han almacenado los datos exitosamente!", "success");
+                        $('#modal-registrar-envio').modal("hide");
+                        cargarTabla();
+                    } else {
+                        swal({
+                            text: "Ocurrió un problema con la transacción.",
+                            icon: "error"
+                        });
+                    }
+                },
+                error: function (xhr, exception) {
+                    swal({
+                        text: "Ocurrió un problema con la transacción.",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+
 
     } else {
         swal("Oops", "¡No se llenaron todos los campos!", "error");
@@ -152,12 +197,70 @@ $('#btnUsarCliente').on("click", function () {
     //clienteExistente = "Existe";
    // $('#lbExisteCliente').html("Se ha agregado usuario...");
 
-    $('#modal-clientes').modal();
+    //$('#modal-clientes').modal();
+    cargarTablaClientes();
 
     /*
     //$('#crearCliente').hide();
     */
 });
+
+
+
+function cargarTablaClientes() {
+
+    $('#modal-clientes').modal();
+
+    var table = $('#table-envio-clientes').DataTable();
+    table.destroy();
+    $('#table-envio-clientes').DataTable({
+        "autoWidth": true,
+        "processing": true,
+        "ajax": baseUrl + "Cliente/ObtenerTodos",
+        "columns": [
+            { "data": "Id", visible: false, searchable: false },
+            { "data": "Nombre" },
+            { "data": "Telefono1" },
+            { "data": "Correo" }
+        ],
+        select: true
+    });
+}
+
+function obtenerIdCliente() {
+
+    var table = $('#table-envio-clientes').DataTable();
+    var id = 0;
+    if (table.$('.selected')[0] !== undefined) {
+        console.log("so it was defined");
+
+        var selectedIndex = table.$('.selected')[0]._DT_RowIndex; //should be .index();   ??
+        console.log("Selected index: " + selectedIndex);
+        var row = table.row(selectedIndex).data();
+        id = row.Id;
+    }
+    return id;
+}
+
+function selectCliente() {
+    var idCliente = obtenerIdCliente();
+
+    if (idCliente !== 0) {
+
+        
+    clienteExistente = idCliente + "";
+    $('#crearCliente').hide();
+    $('#lbExisteCliente').text("Se agrego el cliente");
+    $('#modal-clientes').modal("hide");
+
+    } else {
+        swal({
+            text: "Selecciona un cliente.",
+            icon: "info"
+        });
+    }
+
+}
 
 function validarView() {
     var valido = true;
