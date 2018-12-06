@@ -186,6 +186,7 @@ namespace ParcelScout.Nucleo.Entidades
                 e.Update();
 
                 realizado = true;
+                Correo.CorreoNuevoPaquete(cliente.Correo, cliente.Nombre, destinatario.Nombre, e.NoRastreo, e.Precio.ToString());
             }
             catch (Exception ex)
             {

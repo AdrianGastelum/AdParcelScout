@@ -156,14 +156,6 @@ $('#btnUsarCliente').on("click", function () {
 
 });
 
-$('#btnUsarDestinatario').on("click", function () {
-    destinatarioExistente = "Existe";
-    $('#lbExisteDestinatario').html("Se ha agregado destinatario...");
-
-    $('#crearDestinatario').hide();
-});
-
-
 function validarView() {
     var valido = true;
     var errores = [];
@@ -181,13 +173,29 @@ function validarView() {
                 console.log("Es un campo opcional, omitir");
             } else {
                 valido = false;
-                $(aux).css("background-color", "red");
                 errores.push('El campo ' + campo + ' no fue llenado');
             }
 
-        } //else $(aux).css("background-color", "white");
-
+        } 
+        
     });
+
+    campos.forEach(function (campo, index, campos) {
+        var aux = $.trim($('input[name="' + elemento + "-" + campo + '"]').val());
+        console.log(aux);
+
+
+        if (isNaN(aux)) {
+            if (campo === "peso" || campo === "precio" || campo === "telefono1" || campo === "telefono" || campo === "numero"|| campo === "codigo") {
+                valido = false;
+                errores.push('El campo ' + campo + ' debe ser un valor numerico');
+            }
+
+        }
+        
+    });
+
+    
 
     return valido;
 }

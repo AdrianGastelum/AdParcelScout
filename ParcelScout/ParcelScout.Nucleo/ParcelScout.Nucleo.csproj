@@ -78,6 +78,8 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Entidades\Cliente.cs" />
+    <Compile Include="Entidades\Correo.cs" />
+    <Compile Include="Entidades\Crypter.cs" />
     <Compile Include="Entidades\Destinatario.cs" />
     <Compile Include="Entidades\Envio.cs" />
     <Compile Include="Entidades\Estado.cs" />
