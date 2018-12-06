@@ -74,3 +74,115 @@ function nuevo() {
         });
     }
 }
+
+function eliminarEnvio(){
+    var id = obtenerId();
+
+    if (id !== 0) {
+        swal("¿Esta seguro que desea eliminar este envío?", {
+            buttons: {
+                si: {
+                    text: "¡Seguro!",
+                    value: "true"
+                },
+                no: {
+                    text: "No.",
+                    value: "false"
+                }
+            },
+            dangerMode: true
+        })
+            .then((value) => {
+                switch (value) {
+
+                    case "true":
+                        $.ajax({
+                            url: baseUrl + "Paquete/EliminarEnvio/",    
+                            data: { id: id },
+                            cache: false,
+                            traditional: true,
+                            success: function (data) {
+                                if (data === "true") {
+                                    swal("Exito", "Registro Borrado", "success");
+                                    cargarTabla();
+                                } else {
+                                    swal("Error", "Ocurrió un problema", "warning");
+                                }
+                            }
+                        });
+                        break;
+
+                    case "false":
+
+                        swal({
+                            text: "Operación cancelada",
+                            icon: "error"
+                        });
+                        break;
+
+                    default:
+                        swal({
+                            text: "Operación cancelada",
+                            icon: "error"
+                        });
+                }
+            });
+
+    } else {
+        swal({
+            text: "Seleccione un registro",
+            icon: "warning"
+        });
+    }
+}
+
+function buscarPorRastreo() {
+    var noRastreo = $.trim($('#no-rastreo').val());
+
+    if (noRastreo !== ""){
+        $.ajax({
+            url: baseUrl + "Paquete/ObtenerPorNoRastreo",
+            data: {
+                noRastreo: noRastreo
+            },
+            traditional: true,
+            cache: false,
+            success: function (data) {
+                console.log(data);
+
+
+                if (data !== "null"){
+
+                    var id = data.envio.Id;
+                    console.log(id);
+                    if (id !== 0) {
+                        var url = baseUrl + "Paquete/VistaEnvio/" + id;
+                        window.location.href = url;
+                    } else {
+                        swal({
+                            text: "Registro no encontrado.",
+                            icon: "error"
+                        });
+                    }
+
+                } else {
+                    swal({
+                        text: "Registro no encontrado.",
+                        icon: "error"
+                    });
+                }
+            },
+            error: function (xhr, exception) {
+                swal({
+                    text: "Registro no encontrado o hubo un problema con el servidor.",
+                    icon: "error"
+                });
+            }
+        });
+    } else {
+        swal({
+            text: "Ingrese número de rastreo.",
+            icon: "info"
+        });
+    }
+}

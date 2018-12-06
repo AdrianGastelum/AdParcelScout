@@ -36,7 +36,7 @@ function cargarDatos() {
                 $('#rfc-cliente').text(data.envio.Cliente.RFC);
 
                 //Info del Paquete
-                $('#peso').text(data.envio.Peso);
+                $('#peso').text(data.envio.Peso + "kg");
                 $('#dimensiones').text(data.envio.Dimensiones);
                 $('#tipo-cont').text(data.envio.TipoContenido);
                 $('#descripcion').text(data.envio.Descripcion);
@@ -172,7 +172,7 @@ function cargarDatosEnvio(id) {
 
             switch (data.envio.Estado){
                 case 1:
-                    $('#estado-mod').val("en-proceso");
+                    $('#estado-mod').val("en_proceso");
                     break;
                 case 2:
                     $('#estado-mod').val("enviado");
@@ -213,7 +213,7 @@ function actualizarEnvio() {
                     icon: "success"
                 });
 
-                $('#modal-edit-envio').modal();
+                $('#modal-edit-envio').modal("hide");
                 cargarDatos();
             } else {
                 swal({
@@ -440,6 +440,7 @@ function obtenerId() {
 
     var table = $('#table-historial').DataTable();
     var id = 0;
+    
     if (table.$('.selected')[0] !== undefined) {
         console.log("so it was defined");
 
@@ -449,6 +450,25 @@ function obtenerId() {
         id = row.Id;
     }
     return id;
+}
+
+function obtenerLatLng() {
+    var table = $('#table-historial').DataTable();
+    var id = 0;
+    var lat = 0;
+    var lon = 0;
+
+    if (table.$('.selected')[0] !== undefined) {
+        console.log("so it was defined");
+
+        var selectedIndex = table.$('.selected')[0]._DT_RowIndex; //should be .index();   ??
+        //console.log("Selected index: " + selectedIndex);
+        var row = table.row(selectedIndex).data();
+        id = row.Id;
+        lat = row.Lat;
+        lon = row.Lon;
+    }
+    return { id: id, lat: lat, lon: lon };
 }
 
 //MAPA NUEVA UBICACION
@@ -507,7 +527,16 @@ function cargarMapaDragUltimo(lat, lng) {
         draggable: true
     });
 
+    /*
     $('#btn-sel-ub').click(function () {
+        var latlng = marker.getPosition();
+
+        $('#lat-drag').val(latlng.lat());
+        $('#lon-drag').val(latlng.lng());
+    });
+    */
+
+    $("#btn-sel-ub").on("click", function () {
         var latlng = marker.getPosition();
 
         $('#lat-drag').val(latlng.lat());
@@ -534,8 +563,16 @@ function cargarMapaDrag() {
         title: "SELECCIONA",
         draggable: true
     });
-
+/*
     $('#btn-sel-ub').click(function(){
+        var latlng = marker.getPosition();
+
+        $('#lat-drag').val(latlng.lat());
+        $('#lon-drag').val(latlng.lng());
+    });
+    */
+
+    $("#btn-sel-ub").on("click", function () {
         var latlng = marker.getPosition();
 
         $('#lat-drag').val(latlng.lat());
@@ -579,7 +616,7 @@ function guardarUbicacion() {
 
                         swal({
                             text: "Ubicación Actualizada",
-                            icon: "warning"
+                            icon: "success"
                         });
 
                         $('#modal-nueva-ubicacion').modal("hide");
@@ -615,6 +652,8 @@ function guardarUbicacion() {
     }
 }
 
+
+//MAPA RECORRIDO
 function verRecorrido() {
     var modalC = $('#modal-recorrido-cont');
 
@@ -647,6 +686,7 @@ function cargarHistorialRecorrido() {
                     text: "El historial esta vacio",
                     icon: "info"
                 });
+                $('#modal-recorrido').modal("hide");
 
             }
         },
@@ -701,19 +741,200 @@ function cargarMapaRecorrido(ubicaciones) {
 
 }
 
+//MAPA MODIFICAR
 function modificarRegistro() {
     var id = obtenerId();
 
     if (id !== 0){
 
-        var asdf;
+        var modalC = $('#modal-mod-ubicacion-cont');
+
+        $('#modal-mod-ubicacion').modal();
+        modalC.load(baseUrl + "Paquete/MapaModificar", function () {
+            cargarMapaMod(obtenerLatLng());
+        });
+        
 
     } else {
         swal({
-            text: "Seleccione un elemento de la tabla",
+            text: "Seleccione un elemento de la tabla.",
             icon: "info"
         });
+    }
+}
 
+function cargarMapaMod(ubicacion) {
+    mapC = $('#mapa-mod');
+
+    var id = ubicacion.id;
+    var lat = ubicacion.lat;
+    var lon = ubicacion.lon;
+
+    $('#ubicacion-id').val(id);
+
+    var coords = new google.maps.LatLng(lat, lon, true);
+
+    var map = new google.maps.Map(document.getElementById('mapa-mod'), {
+        center: { lat: lat, lng: lon },
+        zoom: 12
+    });
+
+    var marker = new google.maps.Marker({
+        position: coords,
+        map: map,
+        title: "SELECCIONA",
+        draggable: true
+    });
+
+    /*
+    $('#btn-sel-ub').click(function () {
+        var latlng = marker.getPosition();
+
+        $('#lat-mod').val(latlng.lat());
+        $('#lon-mod').val(latlng.lng());
+    });
+    */
+
+    $("#btn-sel-ub-mod").on("click", function () {
+        var latlng = marker.getPosition();
+
+        $('#lat-mod').val(latlng.lat());
+        $('#lon-mod').val(latlng.lng());
+    });
+
+    google.maps.event.trigger(map, "resize");
+}
+
+
+
+function guardarCambiosUbicacion() {
+
+    var id = $('#ubicacion-id').val();
+
+    var lat = $.trim($('#lat-mod').val());
+    var lon = $.trim($('#lon-mod').val());
+    var ciudad = $.trim($('#ciudad-mod').val());
+    var estado = $.trim($('#estado-mod').val());
+
+    var todoLleno = true;
+    var numericos = true;
+
+    if (id === "") todoLleno = false;
+    if (lat === "") todoLleno = false;
+    if (lon === "") todoLleno = false;
+    if (ciudad === "") todoLleno = false;
+    if (estado === "") todoLleno = false;
+
+    if (isNaN(lat)) numericos = false;
+    if (isNaN(lon)) numericos = false;
+
+    if (todoLleno) {
+        if (numericos) {
+
+            $.ajax({
+                url: baseUrl + "Paquete/ActualizarUbicacion",
+                data: { id: id, ciudad: ciudad, estado: estado, lat: lat, lon: lon },
+                traditional: true,
+                cache: false,
+                success: function (data) {
+                    if (data === "true") {
+
+                        swal({
+                            text: "Datos actualizados.",
+                            icon: "success"
+                        });
+
+                        $('#modal-mod-ubicacion').modal("hide");
+                        cargarTabla();
+                    } else {
+                        swal({
+                            text: "Ocurrió un problema y no se pudo guardar ubicación.",
+                            icon: "warning"
+                        });
+                    }
+                },
+                error: function (xhr, exception) {
+                    swal({
+                        text: "Ocurrió un problema y no se pudo guardar ubicación.",
+                        icon: "warning"
+                    });
+                }
+            });
+
+
+        } else {
+            swal({
+                title: "Error",
+                text: "Latitud y Longitud deben ser númericos, apoyate en el mapa para seleccionar su valor.",
+                icon: "error"
+            });
+        }
+    } else {
+        swal({
+            text: "Por favor llena todos los campos",
+            icon: "warning"
+        });
     }
 
+}
+
+function eliminarUbicacion() {
+    var id = obtenerId();
+
+    if (id !== 0) {
+        swal("¿Esta seguro que desea eliminar el registro?", {
+            buttons: {
+                si: {
+                    text: "¡Seguro!",
+                    value: "true"
+                },
+                no: {
+                    text: "No.",
+                    value: "false"
+                }
+            },
+            dangerMode: true
+        })
+            .then((value) => {
+                switch (value) {
+
+                    case "true":
+                        $.ajax({
+                            url: baseUrl + "Paquete/EliminarUbicacion",
+                            data: { id: id },
+                            cache: false,
+                            traditional: true,
+                            success: function (data) {
+                                if (data === "true") {
+                                    swal("Exito", "Registro Borrado", "success");
+                                    cargarTabla();
+                                } else {
+                                    swal("Error", "Ocurrió un problema", "warning");
+                                }
+                            }
+                        });
+                        break;
+
+                    case "false":
+
+                        swal({
+                            text: "Operación cancelada",
+                            icon: "error"
+                        });
+                        break;
+
+                    default:
+                        swal({
+                            text: "Operación cancelada",
+                            icon: "error"
+                        });
+                }
+            });
+
+    } else {
+        swal({
+            text: "Seleccione un registro",
+            icon: "warning"
+        });
+    }
 }

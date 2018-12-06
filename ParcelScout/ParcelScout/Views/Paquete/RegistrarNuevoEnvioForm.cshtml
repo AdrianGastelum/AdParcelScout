@@ -11,176 +11,204 @@
 <div class="modal-body">
 
 
-        <div class="row">
-            <div class="col-xs-10 col-xs-push-1">
-                <h2>Registrar un nuevo envío</h2>
+    <div class="row">
+        <div class="col-xs-10 col-xs-push-1">
+            <h2>Registrar un nuevo envío</h2>
 
-                <h3 id="form-paso"></h3>
+            <h3 id="form-paso"></h3>
 
-                <div id="regEnvio-content">
-                    <div id="agregar-paquete_paquete">
-                        <h4>Agregar paquete</h4>
-                        <br />
-                        <form>
-                            <div class="form-group" style="width: inherit">
-                                <label for="peso">Peso (Kilogramos):</label>
-                                <input type="text" class="form-control" name="paquete-peso">
+            <div id="regEnvio-content">
+                <div id="agregar-paquete_paquete">
+                    <h4>Agregar paquete</h4>
+                    <br />
+                    <form>
+                        <div class="form-group" style="width: inherit">
+                            <label for="peso">Peso (Kilogramos):</label>
+                            <input type="text" class="form-control" name="paquete-peso">
+                        </div>
+                        <div class="form-group">
+                            <label for="dimensiones">Dimensiones (Alto*Ancho*Largo):</label>
+                            <input type="text" class="form-control" name="paquete-dimensiones">
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo">Tipo de paquete:</label>
+                            <input type="text" class="form-control" name="paquete-tipo">
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripcion:</label>
+                            <input type="text" class="form-control" name="paquete-descripcion">
+                        </div>
+                        <div class="form-group">
+                            <label for="precio">Precio:</label>
+                            <input type="text" class="form-control" name="paquete-precio">
+                        </div>
+                        <br>
+                    </form>
+                </div>
+
+                <div id="agregar-paquete_cliente">
+                    <h4 id="lbExisteCliente">No se ha agregado ningun cliente aún</h4>
+                    <button id="btnUsarCliente" type="button" class="btn btn-seagreen btn-lg">Utilizar cliente ya registrado</button>
+                    <div id="crearCliente">
+                        <h3>O...</h3>
+
+                        <hr />
+
+                        <h2>Crea un nuevo cliente</h2>
+                        <form id="formCliente">
+                            <div class="form-group">
+                                <label for="cliente-nombre">Nombre:</label>
+                                <input type="text" class="form-control" name="cliente-nombre">
                             </div>
                             <div class="form-group">
-                                <label for="dimensiones">Dimensiones (Alto*Ancho*Largo):</label>
-                                <input type="text" class="form-control" name="paquete-dimensiones">
+                                <label for="cliente-domicilio">Domicilio:</label>
+                                <input type="text" class="form-control" name="cliente-domicilio">
                             </div>
                             <div class="form-group">
-                                <label for="tipo">Tipo de paquete:</label>
-                                <input type="text" class="form-control" name="paquete-tipo">
-                            </div>
-                            <div class="from-group">
-                                <label for="descripcion">Descripcion:</label>
-                                <input type="text" class="form-control" name="paquete-descripcion">
+                                <label for="cliente-telefono1">Telefono 1:</label>
+                                <input type="text" class="form-control" name="cliente-telefono1">
                             </div>
                             <div class="form-group">
-                                <label for="precio">Precio:</label>
-                                <input type="text" class="form-control" name="paquete-precio">
+                                <label for="cliente-telefono2">Telefono 2 (Opcional):</label>
+                                <input type="text" class="form-control" name="cliente-telefono2">
                             </div>
-                            <br>
+                            <div class="form-group">
+                                <label for="cliente-telefono3">Telefono 3 (Opcional):</label>
+                                <input type="text" class="form-control" name="cliente-telefono3">
+                            </div>
+                            <div class="form-group">
+                                <label for="cliente-correo">Correo:</label>
+                                <input type="email" class="form-control" name="cliente-correo">
+                            </div>
+                            <div class="form-group">
+                                <label for="cliente-rfc">RFC (Opcional):</label>
+                                <input type="text" class="form-control" name="cliente-rfc">
+                            </div>
+
                         </form>
                     </div>
-
-                    <div id="agregar-paquete_cliente">
-                        <h4 id="lbExisteCliente">No se ha agregado ningun cliente aún</h4>
-                        <button id="btnUsarCliente" type="button" class="btn btn-seagreen btn-lg">Utilizar cliente ya registrado</button>
-                        <div id="crearCliente">
-                            <h3>O...</h3>
-
-                            <hr />
-
-                            <h2>Crea un nuevo cliente</h2>
-                            <form id="formCliente">
-                                <div class="form-group">
-                                    <label for="cliente-nombre">Nombre:</label>
-                                    <input type="text" class="form-control" name="cliente-nombre">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cliente-domicilio">Domicilio:</label>
-                                    <input type="text" class="form-control" name="cliente-domicilio">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cliente-telefono1">Telefono 1:</label>
-                                    <input type="text" class="form-control" name="cliente-telefono1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cliente-telefono2">Telefono 2 (Opcional):</label>
-                                    <input type="text" class="form-control" name="cliente-telefono2">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cliente-telefono3">Telefono 3 (Opcional):</label>
-                                    <input type="text" class="form-control" name="cliente-telefono3">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cliente-correo">Correo:</label>
-                                    <input type="email" class="form-control" name="cliente-correo">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cliente-rfc">RFC (Opcional):</label>
-                                    <input type="text" class="form-control" name="cliente-rfc">
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-
-                    <div id="agregar-paquete_destinatario">
-                        <h4 id="lbExisteDestinatario">No se ha agregado ningun destinatario aún</h4>
-                        <button id="btnUsarDestinatario" type="button" class="btn btn-seagreen btn-lg">Utilizar cliente ya registrado</button>
-
-                        <div id="crearDestinatario">
-                            <h3>O...</h3>
-
-                            <hr />
-
-                            <h2>Crea un nuevo destinatario</h2>
-                            <form>
-                                <div class="form-group">
-                                    <label for="destinatario-nombre">Nombre:</label>
-                                    <input type="text" class="form-control" name="destinatario-nombre">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="destinatario-telefono">Telefono:</label>
-                                    <input type="text" class="form-control" name="destinatario-telefono">
-                                </div>
-                                <div class="form-group">
-                                    <label for="destinatario-correo">Correo:</label>
-                                    <input type="text" class="form-control" name="destinatario-correo">
-                                </div>
-
-                                <hr />
-                                <h3>Domicilio</h3>
-                                <div class="form-group">
-                                    <label for="destinatario-calle">Calle:</label>
-                                    <input type="text" class="form-control" name="destinatario-calle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="destinatario-numero">Número:</label>
-                                    <input type="text" class="form-control" name="destinatario-numero">
-                                </div>
-                                <div class="form-group">
-                                    <label for="destinatario-avenida">Avenida:</label>
-                                    <input type="text" class="form-control" name="destinatario-avenida">
-                                </div>
-                                <div class="form-group">
-                                    <label for="destinatario-colonia">Colonia:</label>
-                                    <input type="text" class="form-control" name="destinatario-colonia">
-                                </div>
-                                <div class="form-group">
-                                    <label for="destinatario-codigo">Código Postal:</label>
-                                    <input type="text" class="form-control" name="destinatario-codigo">
-                                </div>
-                                <div class="form-group">
-                                    <label for="destinatario-ciudad">Ciudad:</label>
-                                    <input type="text" class="form-control" name="destinatario-ciudad">
-                                </div>
-                                <div class="form-group">
-                                    <label for="destinatario-estado">Estado:</label>
-                                    <input type="text" class="form-control" name="destinatario-estado">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="destinatario-referencia">Referencia:</label>
-                                    <input type="text" class="form-control" name="destinatario-referencia">
-                                </div>
-                                <hr />
-                                <div class="form-group">
-                                    <label for="destinatario-persona">Persona que recibira el paquete (Opcional):</label>
-                                    <input type="text" class="form-control" name="destinatario-persona">
-                                </div>
-                                <br>
-
-                            </form>
-
-                        </div>
-                    </div>
-
-
                 </div>
 
-                <div>
-                    <ul class="pager pagination-lg">
-                        <li id="btnPrevious" class="previous"><a>Anterior</a></li>
-                        <li id="btnNext" class="next"><a>Siguiente</a></li>
-                        <li id="btnSubmit" class="next"><a>Finalizar</a></li>
-                    </ul>
+                <div id="agregar-paquete_destinatario">
+
+
+                    <div id="crearDestinatario">
+
+                        <hr />
+
+                        <h2>Crea un nuevo destinatario</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="destinatario-nombre">Nombre:</label>
+                                <input type="text" class="form-control" name="destinatario-nombre">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="destinatario-telefono">Telefono:</label>
+                                <input type="text" class="form-control" name="destinatario-telefono">
+                            </div>
+                            <div class="form-group">
+                                <label for="destinatario-correo">Correo:</label>
+                                <input type="text" class="form-control" name="destinatario-correo">
+                            </div>
+
+                            <hr />
+                            <h3>Domicilio</h3>
+                            <div class="form-group">
+                                <label for="destinatario-calle">Calle:</label>
+                                <input type="text" class="form-control" name="destinatario-calle">
+                            </div>
+                            <div class="form-group">
+                                <label for="destinatario-numero">Número:</label>
+                                <input type="text" class="form-control" name="destinatario-numero">
+                            </div>
+                            <div class="form-group">
+                                <label for="destinatario-avenida">Avenida:</label>
+                                <input type="text" class="form-control" name="destinatario-avenida">
+                            </div>
+                            <div class="form-group">
+                                <label for="destinatario-colonia">Colonia:</label>
+                                <input type="text" class="form-control" name="destinatario-colonia">
+                            </div>
+                            <div class="form-group">
+                                <label for="destinatario-codigo">Código Postal:</label>
+                                <input type="text" class="form-control" name="destinatario-codigo">
+                            </div>
+                            <div class="form-group">
+                                <label for="destinatario-ciudad">Ciudad:</label>
+                                <input type="text" class="form-control" name="destinatario-ciudad">
+                            </div>
+                            <div class="form-group">
+                                <label for="destinatario-estado">Estado:</label>
+                                <input type="text" class="form-control" name="destinatario-estado">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="destinatario-referencia">Referencia:</label>
+                                <input type="text" class="form-control" name="destinatario-referencia">
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <label for="destinatario-persona">Persona que recibira el paquete (Opcional):</label>
+                                <input type="text" class="form-control" name="destinatario-persona">
+                            </div>
+                            <br>
+
+                        </form>
+
+                    </div>
                 </div>
+
+
+            </div>
+
+            <div>
+                <ul class="pager pagination-lg">
+                    <li id="btnPrevious" class="previous"><a>Anterior</a></li>
+                    <li id="btnNext" class="next"><a>Siguiente</a></li>
+                    <li id="btnSubmit" class="next"><a>Finalizar</a></li>
+                </ul>
             </div>
         </div>
-        
-   
+    </div>
+
+
 
     <!--Modal body-->
 </div>
 
 <div class="modal-footer">
-    
+
+</div>
+
+
+<!--Clientes-->
+<div class="modal fade" id="modal-clientes" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" id="modal-clientes-cont">
+
+            <div class="row">
+                <table id="table-envio-clientes" class="table table-nonfluid">
+                    <thead class="datatable-header">
+                        <tr>
+                            <th id="id" hidden>Id</th>
+                            <th>Nombre</th>
+                            <th>Domicilio</th>
+                            <th>Telefono1</th>
+                            <th>Correo</th>
+                            <th>RFC</th>
+                        </tr>
+                    </thead>
+                    <!--Should be empty for ajax data load, or match header th to td count for manual filling-->
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
 </div>
 
 @Scripts.Render("~/Scripts/js/registroenvio.js");

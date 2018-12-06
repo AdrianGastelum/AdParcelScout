@@ -82,7 +82,8 @@ namespace ParcelScout.Nucleo.Entidades
                 u.Nombre = nombre;
                 u.Correo = correo;
                 u.Cuenta = cuenta;
-                u.Password = password;
+                //u.Password = password;
+                u.Password = Crypter.Encriptar(password);
                 u.Rol = rol;
                 u.Perfil = perfil;
                 u.Save();
@@ -106,7 +107,7 @@ namespace ParcelScout.Nucleo.Entidades
                 Usuario u = ObtenerPorId(id);
                 u.Nombre = nombre;
                 u.Cuenta = cuenta;
-                u.Password = password;
+                u.Password = Crypter.Encriptar(password);                                                                                                                                                                                                                                                                                                                                                          ;
                 u.Correo = correo;
                 u.Rol = rol;
                 u.Perfil = perfil;
@@ -144,6 +145,7 @@ namespace ParcelScout.Nucleo.Entidades
         public static Usuario ObtenerPorLogin(string correo, string password)
         {
             Usuario user = new Usuario();
+            string password_encriptada = Crypter.Encriptar(password);
 
             try
             {
@@ -151,7 +153,7 @@ namespace ParcelScout.Nucleo.Entidades
                 {
                     ICriteria crit = session.CreateCriteria(user.GetType());
                     crit.Add(Expression.Eq("Correo", correo));
-                    crit.Add(Expression.Eq("Password", password));
+                    crit.Add(Expression.Eq("Password", password_encriptada));
 
                     user = (crit.UniqueResult<Usuario>());
                 }

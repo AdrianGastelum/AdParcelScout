@@ -172,6 +172,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\ValidateSession.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaqueteController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -186,6 +187,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\footer-with-logo.css" />
+    <Content Include="Content\img\Logo-sin-texto.png" />
+    <Content Include="Content\img\Logo.png" />
     <Content Include="Content\style_custom.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -201,6 +204,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\js\cliente.js" />
     <Content Include="Scripts\js\mapas.js" />
     <Content Include="Scripts\js\paquete.js" />
     <Content Include="Scripts\js\registroenvio.js" />
@@ -239,10 +243,12 @@
     <Content Include="Views\Paquete\MapaNuevaUbicacion.cshtml" />
     <Content Include="Views\Paquete\MapaRecorrido.cshtml" />
     <Content Include="Views\Paquete\MapaModificar.cshtml" />
+    <Content Include="Views\Shared\NavbarRes.cshtml" />
+    <Content Include="Views\Cliente\GestionClientes.cshtml" />
+    <Content Include="Views\Cliente\EditInfoCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

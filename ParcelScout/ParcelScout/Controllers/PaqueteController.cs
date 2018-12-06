@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace ParcelScout.Controllers
 {
 
-    [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
+    [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR, Perfil.SOLO_LECTURA})]
     public class PaqueteController : Controller
     {
         // GET: Paquete
@@ -127,6 +127,10 @@ namespace ParcelScout.Controllers
             return PartialView("~/Views/Paquete/MapaRecorrido.cshtml");
         }
 
+        public ActionResult MapaModificar() {
+            return PartialView("~/Views/Paquete/MapaModificar.cshtml");
+        }
+
         public ActionResult GuardarNuevoEnvio(int idEmpleado,
 
                 double paquetePeso, string paqueteDimensiones, string paqueteTipo,
@@ -209,20 +213,50 @@ namespace ParcelScout.Controllers
 
         }
 
+        public ActionResult ObtenerPorCliente(int id)
+        {
+            try {
+                IList<Envio> envios = Envio.ObtenerPorCliente(id);
+             
+                return Content("funciono");
+            }
+            catch (Exception ex){
+                return Content("mal");
+            }
+        }
+
+
         public ActionResult ObtenerPorNoRastreo(string noRastreo)
         {
             try
             {
-
                 Envio envio = Envio.ObtenerPorNoRastreo(noRastreo);
 
-                return Json(new { envio }, JsonRequestBehavior.AllowGet);
+                if (envio != null) {
+                    return Json(new { envio }, JsonRequestBehavior.AllowGet);
+
+                } else {
+                    return Content("null");
+                }
             }
             catch (Exception ex)
             {
                 return RedirectToAction("Error", "Home");
             }
 
+        }
+
+        [ValidateSession(Rol = new Perfil[] { Perfil.ADMINISTRADOR })]
+        public ActionResult EliminarEnvio(int id) {
+            ActionResult action = null;
+
+            if (Envio.Delete(id)) {
+                action = Content("true");
+            } else {
+                action = Content("false");
+            }
+
+            return action;
         }
 
         public ActionResult GuardarUbicacion(int id, double lat, double lon, string ciudad, string estado)
@@ -258,40 +292,34 @@ namespace ParcelScout.Controllers
 
         }
 
+        public ActionResult ActualizarUbicacion(int id, string ciudad, string estado, double lat, double lon) {
+            ActionResult action = null;
 
+            if (RegistroUbicacion.GuardarCambios(id, ciudad, estado, lat, lon))
+            {
 
-        //public ActionResult PruebaGuardado() {
-        //    ActionResult action = null;
+                action = Content("true");
 
-        //    Usuario u = Usuario.ObtenerPorId(1);
-        //    Cliente c = new Cliente();
-        //    c.Nombre = "Iris";
-        //    c.Domicilio = "Golfo de California, Calle: centro cívico.";
-        //    c.Telefono = "6229846544";
-        //    c.RFC = "GANI1234dfad";
-        //    c.Correo = "iris@gmail.com";
+            } else {
+                action = Content("false");
+            }
 
-        //    Destinatario d = new Destinatario();
-        //    d.Nombre = "Dulce";
-        //    d.Domicilio = "Somewhere at San vicente";
-        //    d.CodigoPostal = "85477";
-        //    d.Ciudad = "Guaymas";
-        //    d.Estado = "Sonora";
-        //    d.Correo = "dulce@gmail.com";
-        //    d.Recibe = "Leonardo";
-        //    d.Telefono = "45654325";
+            return action;
+        }
 
+        public ActionResult EliminarUbicacion(int id) {
+            ActionResult action = null;
 
+            if (RegistroUbicacion.Delete(id)) {
+                action = Content("true");
+            } else {
+                action = Content("false");
+            }
 
-        //    if (Envio.Guardar(u, 123, "fragil", "un paquete con cinta roja o algo", 359.50, "", c, d)) {
-        //        action = Content("TRUE");
-        //    } else {
-        //        action = Content("Failed");
-        //    }
+            return action;
+        }
 
-
-        //    return action;
-        //}
+      
 
 
     }

@@ -35,6 +35,15 @@ nav {
     color: black;
 }
 
+.logo-img {
+
+    height: 55px;
+    width: auto;
+
+    padding: 3px;
+
+}
+
 #nav-btn-container {
     height: var(--altura-nav);
     padding-right: 20px;
@@ -81,6 +90,28 @@ nav {
     //min-height: 275px;
 }
 
+#logo-grande {
+    margin-top: 20vh;
+    min-height: 50vh;
+}
+
+.logo-grande-img {
+    width: 100%;
+    height: auto;
+    height: auto;
+
+}
+
+.logo-grande-txt {
+    font-family: 'Pacifico', 'Segoe UI', sans-serif !important;
+    font-size: 50px;
+    color: black;
+    width: 100%;
+    text-align: center;
+    text-decoration:none;
+ 
+}
+
 #registro-form {
     margin-top: 10vh;
 
@@ -97,6 +128,7 @@ form input {
     font-family: var(--fuente-principal);
     font-size: 16px;
     border-radius: 5px;
+
 }
 
 .btn-sienna {
@@ -133,14 +165,9 @@ pagination > .active > a, .pagination > .active > span, .pagination > .active > 
 }
 
 /*MAPAS*/
-#mapa-drag {
+#mapa-drag, #mapa-recorrido, #mapa-mod {
     height: 300px;
 
-
-}
-
-#mapa-recorrido {
-    height: 300px;
 
 }
 

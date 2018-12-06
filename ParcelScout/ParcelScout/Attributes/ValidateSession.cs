@@ -34,7 +34,15 @@ namespace ParcelScout.Attributes
             return authorize;
         }
 
+        /*
+        protected override void HandleUnauthorizedRequest(AuthorizationContext context)
+        {
+            System.Web.Controllers.HomeController home = new System.Web.Controllers.HomeController();
 
+            
+            context.Result = home.CerrarSesion();
+        }
+        */
 
     }
 }
