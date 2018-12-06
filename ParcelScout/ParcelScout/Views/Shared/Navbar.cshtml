@@ -3,6 +3,8 @@
         
     <div class="container">
         <div class="navbar-header">
+           
+                <img class="logo-img navbar-brand" src="@Url.Content("~/Content/img/Logo-sin-texto.png")" alt="logo" />
             <a id="logo" href="" class="navbar-brand">
                 ParcelScout
             </a>
@@ -25,7 +27,7 @@
         {
             <ul class="nav nav-pills navbar-right" role="tablist">
                 <li><a class="navbar-btn btn-sienna" href="@Url.Action("GestionEnvios", "Paquete")">Paquetería</a></li>
-                <li><a class="navbar-btn btn-sienna" href="#">Clientes</a></li>
+                <li><a class="navbar-btn btn-sienna" href="@Url.Action("GestionClientes", "Cliente")">Clientes</a></li>
                 
                 @if ((string)Session["usuario-rol"] == "admin")
                 {

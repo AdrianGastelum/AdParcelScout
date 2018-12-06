@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Gestion Clientes";
+}
+
+<div class="row">
+    <div class="container">
+
+
+        <div class="row">
+
+            <h1>Clientes</h1>
+
+            <!--ROW END-->
+        </div>
+
+        <br />
+
+        <div class="row">
+
+            <div class="btn-group">
+                <!--
+                <button type="button" onclick="nuevo()" class="btn btn-seagreen">Nuevo</button>
+                <button type="button" onclick="ver()" class="btn btn-seagreen">Ver</button>
+                -->
+
+                <button type="button" onclick="editarCliente()" class="btn btn-seagreen">Editar</button>
+                @if ((string)Session["usuario-rol"] == "admin")
+                {
+                    <button type="button" onclick="eliminarCliente()" class="btn btn-seagreen">Eliminar</button>
+                }
+
+
+            </div>
+            <!--ROW END-->
+        </div>
+
+        <!--CONTAINER END-->
+    </div>
+
+    <!--ROW END-->
+</div>
+
+<div class="row vp-100">
+
+    <div id="datatable-container" class="container">
+
+
+        <input type="hidden" value="@Session["usuario-id"]" id="usuario-id" />
+
+        <br />
+        <div class="row">
+            <table id="table-clientes" class="table">
+                <thead class="datatable-header">
+                    <tr>
+                        <th id="id" hidden>Id</th>
+                        <th>Nombre</th>
+                        <th>Domicilio</th>
+                        <th>Telefono1</th>
+                        <th>Correo</th>
+                        <th>RFC</th>
+                    </tr>
+                </thead>
+                <!--Should be empty for ajax data load, or match header th to td count for manual filling-->
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    <!--ROW END-->
+</div>
+
+<!--INFO CLIENTE-->
+<div class="modal fade" id="modal-edit-cliente" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" id="modal-edit-cliente-cont">
+
+        </div>
+
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/js/cliente.js")

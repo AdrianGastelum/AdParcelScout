@@ -35,6 +35,15 @@ nav {
     color: black;
 }
 
+.logo-img {
+
+    height: 55px;
+    width: auto;
+
+    padding: 3px;
+
+}
+
 #nav-btn-container {
     height: var(--altura-nav);
     padding-right: 20px;
@@ -79,6 +88,28 @@ nav {
     margin-top: 20vh;
     min-height: 50vh;
     //min-height: 275px;
+}
+
+#logo-grande {
+    margin-top: 20vh;
+    min-height: 50vh;
+}
+
+.logo-grande-img {
+    width: 100%;
+    height: auto;
+    height: auto;
+
+}
+
+.logo-grande-txt {
+    font-family: 'Pacifico', 'Segoe UI', sans-serif !important;
+    font-size: 50px;
+    color: black;
+    width: 100%;
+    text-align: center;
+    text-decoration:none;
+ 
 }
 
 #registro-form {

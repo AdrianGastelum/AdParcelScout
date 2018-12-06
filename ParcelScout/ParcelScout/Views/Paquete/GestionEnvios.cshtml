@@ -1,21 +1,28 @@
 ﻿
 @{
-    ViewBag.Title = "GestionEnvios";
+    ViewBag.Title = "Gestion Envios";
 }
 
 <div class="row">
     <div class="container">
 
-        <h1>Paquetería</h1>
 
         <div class="row">
-            <!--
-            <div class="form-group">
-                <label class="navbar-form" for="nombre">Nombre:</label>
-                <input type="text" class="form-control navbar-form input-sm" name="nombre" id="nombre-d-mod">
-                <button type="button" onclick="nuevo()" class="btn btn-seagreen navbar-form">Nuevo</button>
-            </div>
-           -->
+
+        <h1>Paquetería</h1>     
+        
+
+            <form class="col-md-4 col-md-push-4 col-xs-12">
+                <div class="form-group">
+
+                    <label class="text-center" for="no-rastreo">No. de Rastreo:</label>
+                    <input type="text" class="form-control input-sm " name="no-rastreo" id="no-rastreo">
+                    <br />
+                    <button type="button" onclick="buscarPorRastreo()" class="btn btn-seagreen col-xs-4 col-xs-push-4">Buscar</button>
+
+                </div>
+            </form>
+
 
             <!--ROW END-->
         </div>
@@ -23,6 +30,7 @@
         <br />
 
         <div class="row">
+
             <div class="btn-group">
                 <button type="button" onclick="nuevo()" class="btn btn-seagreen">Nuevo</button>
                 <button type="button" onclick="ver()" class="btn btn-seagreen">Ver</button>
@@ -38,6 +46,7 @@
         <!--ROW END-->
         </div>
 
+    <!--CONTAINER END-->
     </div>
 
     <!--ROW END-->

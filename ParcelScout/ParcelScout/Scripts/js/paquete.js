@@ -135,3 +135,54 @@ function eliminarEnvio(){
         });
     }
 }
+
+function buscarPorRastreo() {
+    var noRastreo = $.trim($('#no-rastreo').val());
+
+    if (noRastreo !== ""){
+        $.ajax({
+            url: baseUrl + "Paquete/ObtenerPorNoRastreo",
+            data: {
+                noRastreo: noRastreo
+            },
+            traditional: true,
+            cache: false,
+            success: function (data) {
+                console.log(data);
+
+
+                if (data !== "null"){
+
+                    var id = data.envio.Id;
+                    console.log(id);
+                    if (id !== 0) {
+                        var url = baseUrl + "Paquete/VistaEnvio/" + id;
+                        window.location.href = url;
+                    } else {
+                        swal({
+                            text: "Registro no encontrado.",
+                            icon: "error"
+                        });
+                    }
+
+                } else {
+                    swal({
+                        text: "Registro no encontrado.",
+                        icon: "error"
+                    });
+                }
+            },
+            error: function (xhr, exception) {
+                swal({
+                    text: "Registro no encontrado o hubo un problema con el servidor.",
+                    icon: "error"
+                });
+            }
+        });
+    } else {
+        swal({
+            text: "Ingrese número de rastreo.",
+            icon: "info"
+        });
+    }
+}

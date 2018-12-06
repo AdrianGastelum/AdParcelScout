@@ -30,6 +30,8 @@ namespace ParcelScout.Nucleo.Entidades
 
         public IList<RegistroUbicacion> Historial { get; set; }
 
+
+
         public static IList<Envio> ObtenerTodos()
         {
             IList<Envio> envios = new List<Envio>();
@@ -39,6 +41,56 @@ namespace ParcelScout.Nucleo.Entidades
                 {
                     ICriteria crit = session.CreateCriteria(new Envio().GetType());
 
+
+                    //crit.SetResultTransformer(Transformers.AliasToBean<Envio>());
+
+                    envios = crit.List<Envio>();
+                    foreach (Envio envio in envios)
+                    {
+                        envio.fechaString = envio.FechaCreacion.ToString("MM/dd/yyyy HH:mm:ss");
+
+                        switch (envio.Estado)
+                        {
+                            case Estado.EN_PROCESO:
+                                envio.estadoString = "En Proceso";
+                                break;
+                            case Estado.ENVIADO:
+                                envio.estadoString = "En Proceso";
+                                break;
+                            case Estado.RECIBIDO:
+                                envio.estadoString = "En Proceso";
+                                break;
+                            case Estado.CANCELADO:
+                                envio.estadoString = "En Proceso";
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    session.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return envios;
+        }
+
+        public static IList<Envio> ObtenerPorCliente(int id)
+        {
+            IList<Envio> envios = new List<Envio>();
+            try
+            {
+
+                Cliente c = Cliente.ObtenerPorId(id);
+
+                using (ISession session = Persistent.SessionFactory.OpenSession())
+                {
+                    ICriteria crit = session.CreateCriteria(new Envio().GetType());
+                    crit.Add(Expression.Eq("Cliente", c));
 
                     //crit.SetResultTransformer(Transformers.AliasToBean<Envio>());
 
@@ -122,6 +174,7 @@ namespace ParcelScout.Nucleo.Entidades
             Envio e = new Envio();
             try
             {
+
                 using (ISession session = Persistent.SessionFactory.OpenSession())
                 {
                     ICriteria crit = session.CreateCriteria(e.GetType());

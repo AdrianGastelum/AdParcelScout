@@ -149,11 +149,14 @@ $('#btnSubmit').on("click", function () {
 });
 
 $('#btnUsarCliente').on("click", function () {
-    clienteExistente = "Existe";
-    $('#lbExisteCliente').html("Se ha agregado usuario...");
+    //clienteExistente = "Existe";
+   // $('#lbExisteCliente').html("Se ha agregado usuario...");
 
-    $('#crearCliente').hide();
+    $('#modal-clientes').modal();
 
+    /*
+    //$('#crearCliente').hide();
+    */
 });
 
 function validarView() {

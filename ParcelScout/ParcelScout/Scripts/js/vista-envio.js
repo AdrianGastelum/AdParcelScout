@@ -36,7 +36,7 @@ function cargarDatos() {
                 $('#rfc-cliente').text(data.envio.Cliente.RFC);
 
                 //Info del Paquete
-                $('#peso').text(data.envio.Peso);
+                $('#peso').text(data.envio.Peso + "kg");
                 $('#dimensiones').text(data.envio.Dimensiones);
                 $('#tipo-cont').text(data.envio.TipoContenido);
                 $('#descripcion').text(data.envio.Descripcion);
@@ -172,7 +172,7 @@ function cargarDatosEnvio(id) {
 
             switch (data.envio.Estado){
                 case 1:
-                    $('#estado-mod').val("en-proceso");
+                    $('#estado-mod').val("en_proceso");
                     break;
                 case 2:
                     $('#estado-mod').val("enviado");
@@ -213,7 +213,7 @@ function actualizarEnvio() {
                     icon: "success"
                 });
 
-                $('#modal-edit-envio').modal();
+                $('#modal-edit-envio').modal("hide");
                 cargarDatos();
             } else {
                 swal({
@@ -527,7 +527,16 @@ function cargarMapaDragUltimo(lat, lng) {
         draggable: true
     });
 
+    /*
     $('#btn-sel-ub').click(function () {
+        var latlng = marker.getPosition();
+
+        $('#lat-drag').val(latlng.lat());
+        $('#lon-drag').val(latlng.lng());
+    });
+    */
+
+    $("#btn-sel-ub").on("click", function () {
         var latlng = marker.getPosition();
 
         $('#lat-drag').val(latlng.lat());
@@ -554,8 +563,16 @@ function cargarMapaDrag() {
         title: "SELECCIONA",
         draggable: true
     });
-
+/*
     $('#btn-sel-ub').click(function(){
+        var latlng = marker.getPosition();
+
+        $('#lat-drag').val(latlng.lat());
+        $('#lon-drag').val(latlng.lng());
+    });
+    */
+
+    $("#btn-sel-ub").on("click", function () {
         var latlng = marker.getPosition();
 
         $('#lat-drag').val(latlng.lat());
@@ -769,7 +786,16 @@ function cargarMapaMod(ubicacion) {
         draggable: true
     });
 
+    /*
     $('#btn-sel-ub').click(function () {
+        var latlng = marker.getPosition();
+
+        $('#lat-mod').val(latlng.lat());
+        $('#lon-mod').val(latlng.lng());
+    });
+    */
+
+    $("#btn-sel-ub-mod").on("click", function () {
         var latlng = marker.getPosition();
 
         $('#lat-mod').val(latlng.lat());
@@ -778,6 +804,8 @@ function cargarMapaMod(ubicacion) {
 
     google.maps.event.trigger(map, "resize");
 }
+
+
 
 function guardarCambiosUbicacion() {
 

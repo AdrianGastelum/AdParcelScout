@@ -16,7 +16,7 @@ namespace ParcelScout.Nucleo.Entidades
         public string Telefono1 { get; set; }
         public string Telefono2 { get; set; }
         public string Telefono3 { get; set; }
-        public string Telefono { get; set; }
+        //public string Telefono { get; set; }
         public string Correo { get; set; }
         public string RFC { get; set; }
 
@@ -62,7 +62,7 @@ namespace ParcelScout.Nucleo.Entidades
             return c;
         }
 
-        public static bool Guardar(string nombre, string domicilio, string telefono,
+        public static bool Guardar(string nombre, string domicilio, string telefono1, string telefono2, string telefono3,
                                     string correo, string rfc)
         {
             bool realizado = false;
@@ -72,7 +72,9 @@ namespace ParcelScout.Nucleo.Entidades
                 Cliente c = new Cliente();
                 c.Nombre = nombre;
                 c.Domicilio = domicilio;
-                c.Telefono = telefono;
+                c.Telefono1 = telefono1;
+                c.Telefono2 = telefono2;
+                c.Telefono3 = telefono3;
                 c.Correo = correo;
                 c.RFC = rfc;
 
