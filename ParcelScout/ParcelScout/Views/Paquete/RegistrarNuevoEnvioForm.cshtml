@@ -47,10 +47,13 @@
                 </div>
 
                 <div id="agregar-paquete_cliente">
+                    <!--
+                        
                     <h4 id="lbExisteCliente">No se ha agregado ningun cliente aún</h4>
                     <button id="btnUsarCliente" type="button" class="btn btn-seagreen btn-lg">Utilizar cliente ya registrado</button>
                     <div id="crearCliente">
                         <h3>O...</h3>
+                    -->
 
                         <hr />
 
@@ -182,33 +185,6 @@
 </div>
 
 
-<!--Clientes-->
-<div class="modal fade" id="modal-clientes" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content" id="modal-clientes-cont">
-
-            <div class="row">
-                <table id="table-envio-clientes" class="table table-nonfluid">
-                    <thead class="datatable-header">
-                        <tr>
-                            <th id="id" hidden>Id</th>
-                            <th>Nombre</th>
-                            <th>Domicilio</th>
-                            <th>Telefono1</th>
-                            <th>Correo</th>
-                            <th>RFC</th>
-                        </tr>
-                    </thead>
-                    <!--Should be empty for ajax data load, or match header th to td count for manual filling-->
-                    <tbody></tbody>
-                </table>
-            </div>
-
-        </div>
-
-    </div>
-</div>
 
 @Scripts.Render("~/Scripts/js/registroenvio.js");
+

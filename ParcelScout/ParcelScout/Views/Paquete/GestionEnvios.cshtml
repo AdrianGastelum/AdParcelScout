@@ -9,8 +9,8 @@
 
         <div class="row">
 
-        <h1>Paquetería</h1>     
-        
+            <h1>Paquetería</h1>
+
 
             <form class="col-md-4 col-md-push-4 col-xs-12">
                 <div class="form-group">
@@ -36,17 +36,17 @@
                 <button type="button" onclick="ver()" class="btn btn-seagreen">Ver</button>
 
                 <!-- <button type="button" onclick="edit()" class="btn btn-seagreen">Editar</button>  -->
-                @if((string)Session["usuario-rol"] == "admin")
+                @if ((string)Session["usuario-rol"] == "admin")
                 {
                     <button type="button" onclick="eliminarEnvio()" class="btn btn-seagreen">Eliminar</button>
                 }
 
 
             </div>
-        <!--ROW END-->
+            <!--ROW END-->
         </div>
 
-    <!--CONTAINER END-->
+        <!--CONTAINER END-->
     </div>
 
     <!--ROW END-->
@@ -56,8 +56,8 @@
 
     <div id="datatable-container" class="container">
 
-        
-        <input type="hidden" value="@Session["usuario-id"]" id="usuario-id"/>
+
+        <input type="hidden" value="@Session["usuario-id"]" id="usuario-id" />
 
         <br />
         <div class="row">
@@ -93,6 +93,77 @@
 
     </div>
 </div>
+
+
+
+<!--Clientes-->
+<div class="modal fade" id="modal-clientes" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content"   id="modal-clientes-cont">
+
+
+            <div class="modal-header modal-header-sienna">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Info. del Cliente</h4>
+            </div>
+
+            <div class="modal-body">
+
+
+
+
+                <div class="row">
+                    <table id="table-envio-clientes" class="table table-nonfluid col-xs-10 col-xs-push-1">
+                        <thead class="datatable-header">
+                            <tr>
+                                <th id="id" hidden>Id</th>
+                                <th>Nombre</th>
+                                <th>Telefono1</th>
+                                <th>Correo</th>
+                            </tr>
+                        </thead>
+                        <!--Should be empty for ajax data load, or match header th to td count for manual filling-->
+                        <tbody></tbody>
+                    </table>
+
+                    <br />
+
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-10 col-xs-push-1">
+                        <button type="button" class="btn btn-seagreen pull-right shadow" onclick="selectCliente()">Seleccionar</button>
+
+                    </div>
+                </div>
+
+           
+
+
+                <!--Modal body-->
+            </div>
+            <!--
+            -->
+                
+                
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+            </div>
+                
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
 
 
 @Scripts.Render("~/Scripts/js/paquete.js")

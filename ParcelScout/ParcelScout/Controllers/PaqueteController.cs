@@ -183,6 +183,54 @@ namespace ParcelScout.Controllers
             return action;
         }
 
+        public ActionResult GuardarNuevoEnvioConCliente(int idEmpleado,
+
+                double paquetePeso, string paqueteDimensiones, string paqueteTipo,
+                string paqueteDescripcion, double paquetePrecio,
+
+                int idCliente,
+
+                string destinatarioNombre, string destinatarioTelefono, string destinatarioCorreo,
+                string destinatarioCalle, string destinatarioNumero, string destinatarioAvenida,
+                string destinatarioColonia, string destinatarioCodigo, string destinatarioCiudad,
+                string destinatarioEstado, string destinatarioReferencia, string destinatarioPersona)
+        {
+            ActionResult action = null;
+
+            Usuario u = Usuario.ObtenerPorId(idEmpleado);
+
+            Cliente c = Cliente.ObtenerPorId(idCliente);
+
+            Destinatario d = new Destinatario();
+            d.Nombre = destinatarioNombre;
+            d.Domicilio = "Calle: " + destinatarioCalle +
+                        ", Av. " + destinatarioAvenida +
+                        ", Col. " + destinatarioColonia +
+                        ", Num: " + destinatarioNumero +
+                        ", Ref. " + destinatarioReferencia;
+            d.Telefono = destinatarioTelefono;
+            d.Correo = destinatarioCorreo;
+            d.CodigoPostal = destinatarioCodigo;
+            d.Ciudad = destinatarioCiudad;
+            d.Estado = destinatarioEstado;
+            d.Recibe = destinatarioPersona;
+
+
+
+
+            if (Envio.Guardar(u, paquetePeso, paqueteDimensiones, paqueteTipo, paqueteDescripcion, paquetePrecio, c, d))
+            {
+                action = Content("true");
+            }
+            else
+            {
+                action = Content("false");
+            }
+
+            return action;
+        }
+
+
         public ActionResult ObtenerTodos()
         {
             try
